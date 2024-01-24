@@ -40,6 +40,12 @@ const manifestForPlugIn = {
         type: "image/png",
         purpose: "any maskable",
       },
+      {
+        src: "/android-chrome-144x144.png",
+        sizes: "144x144",
+        type: "image/png",
+        purpose: "any",
+      },
     ],
     theme_color: "#171717",
     background_color: "#f0e7db",
