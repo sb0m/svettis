@@ -44,8 +44,8 @@ const manifestForPlugIn = {
     theme_color: "#171717",
     background_color: "#f0e7db",
     display: "standalone",
-    scope: "/",
-    start_url: "/",
+    scope: "/svettis/",
+    start_url: "/svettis/",
     orientation: "portrait",
     // registerType: "autoUpdate",
     // devOptions: {
