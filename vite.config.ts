@@ -51,7 +51,7 @@ const manifestForPlugIn = {
     // devOptions: {
     //   enabled: true,
     // },
-    // injectRegister: "auto",
+    injectRegister: "auto",
   },
 };
 
