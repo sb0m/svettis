@@ -10,7 +10,7 @@ import { VitePWA } from "vite-plugin-pwa";
 
 const manifestForPlugIn = {
   registerType: "prompt",
-  includeAssests: ["favicon.ico", "apple-touc-icon.png", "masked-icon.svg"],
+  includeAssests: ["favicon.ico", "apple-touch-icon.png", "masked-icon.svg"],
   manifest: {
     name: "React-vite-app",
     short_name: "react-vite-app",
@@ -62,3 +62,9 @@ export default defineConfig({
   plugins: [react(), VitePWA(manifestForPlugIn)],
   base: "/svettis/",
 });
+
+// registerType: "autoUpdate",
+// devOptions: {
+//   enabled: true,
+// },
+// injectRegister: "auto",
