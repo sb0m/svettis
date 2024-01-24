@@ -17,25 +17,25 @@ const manifestForPlugIn = {
     description: "I am a simple vite app",
     icons: [
       {
-        src: "/svettis/android-chrome-192x192.png",
+        src: "/android-chrome-192x192.png",
         sizes: "192x192",
         type: "image/png",
         purpose: "favicon",
       },
       {
-        src: "/svettis/android-chrome-512x512.png",
+        src: "/android-chrome-512x512.png",
         sizes: "512x512",
         type: "image/png",
         purpose: "favicon",
       },
       {
-        src: "/svettis/apple-touch-icon.png",
+        src: "/apple-touch-icon.png",
         sizes: "180x180",
         type: "image/png",
         purpose: "apple touch icon",
       },
       {
-        src: "/svettis/masked-icon.svg",
+        src: "/maskable_icon.png",
         sizes: "512x512",
         type: "image/png",
         purpose: "any maskable",
@@ -47,11 +47,6 @@ const manifestForPlugIn = {
     scope: "/svettis/",
     start_url: "/svettis/",
     orientation: "portrait",
-    // registerType: "autoUpdate",
-    // devOptions: {
-    //   enabled: true,
-    // },
-    injectRegister: "auto",
   },
 };
 
