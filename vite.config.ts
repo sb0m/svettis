@@ -10,11 +10,7 @@ import { VitePWA } from "vite-plugin-pwa";
 
 const manifestForPlugIn = {
   registerType: "prompt",
-  includeAssests: [
-    "favicon.ico",
-    "apple-touch-icon.png",
-    "safari-pinned-tab.svg",
-  ],
+  includeAssests: ["favicon.ico", "apple-touch-icon.png", "masked-icon.svg"],
   manifest: {
     name: "React-vite-app",
     short_name: "react-vite-app",
@@ -39,7 +35,7 @@ const manifestForPlugIn = {
         purpose: "apple touch icon",
       },
       {
-        src: "/safari-pinned-tab.svg",
+        src: "/masked-icon.svg",
         sizes: "512x512",
         type: "image/png",
         purpose: "any maskable",
