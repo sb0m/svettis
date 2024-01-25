@@ -45,6 +45,7 @@ const manifestForPlugIn = {
         src: "/icons/icon-192x192.png",
         sizes: "192x192",
         type: "image/png",
+        purpose: "maskable",
       },
       {
         src: "/icons/icon-384x384.png",
@@ -60,7 +61,7 @@ const manifestForPlugIn = {
         src: "/icons/maskable_icon.png",
         sizes: "512x512",
         type: "image/png",
-        purpose: "maskable any",
+        purpose: "maskable",
       },
       {
         src: "/icons/icon-512x512.png",
