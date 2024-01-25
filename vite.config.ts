@@ -10,44 +10,44 @@ import { VitePWA } from "vite-plugin-pwa";
 
 const manifestForPlugIn = {
   registerType: "prompt",
-  includeAssests: ["favicon.ico", "apple-touch-icon.png", "masked-icon.svg"],
+  // includeAssests: ["favicon.ico", "apple-touch-icon.png", "masked-icon.svg"],
   manifest: {
     name: "React-vite-app",
     short_name: "react-vite-app",
     description: "I am a simple vite app",
     icons: [
       {
-        src: "/android-chrome-192x192.png",
+        src: "/icons/android-chrome-192x192.png",
         sizes: "192x192",
         type: "image/png",
         purpose: "favicon",
       },
       {
-        src: "/android-chrome-512x512.png",
+        src: "/icons/android-chrome-512x512.png",
         sizes: "512x512",
         type: "image/png",
         purpose: "favicon",
       },
-      // {
-      //   src: "/apple-touch-icon.png",
-      //   sizes: "180x180",
-      //   type: "image/png",
-      //   purpose: "apple touch icon",
-      // },
       {
-        src: "/maskable_icon.png",
+        src: "/icons/apple-touch-icon.png",
+        sizes: "180x180",
+        type: "image/png",
+        purpose: "apple touch icon",
+      },
+      {
+        src: "/icons/maskable_icon.png",
         sizes: "512x512",
         type: "image/png",
         purpose: "any maskable",
       },
       {
-        src: "/android-chrome-144x144.png",
+        src: "/icons/android-chrome-144x144.png",
         sizes: "144x144",
         type: "image/png",
         purpose: "any",
       },
       {
-        src: "/android-chrome-144x144.png",
+        src: "/icons/android-chrome-144x144.png",
         sizes: "144x144",
         type: "image/png",
       },
