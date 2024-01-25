@@ -28,12 +28,12 @@ const manifestForPlugIn = {
         type: "image/png",
         purpose: "favicon",
       },
-      {
-        src: "/apple-touch-icon.png",
-        sizes: "180x180",
-        type: "image/png",
-        purpose: "apple touch icon",
-      },
+      // {
+      //   src: "/apple-touch-icon.png",
+      //   sizes: "180x180",
+      //   type: "image/png",
+      //   purpose: "apple touch icon",
+      // },
       {
         src: "/maskable_icon.png",
         sizes: "512x512",
