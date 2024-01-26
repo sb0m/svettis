@@ -1,32 +1,48 @@
-import { useEffect, useState } from "react";
-import "./App.css";
+import { Link, Outlet, useLocation } from "react-router-dom";
+import { styled } from "styled-components";
 
-function App() {
-  const [count, setCount] = useState(0);
+const Root = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  background-color: #465775;
+  font-family: Poor Story, sans-serif;
+  color: #e7bb41;
+  text-align: center;
 
-  useEffect(() => {
-    if (count > 10) {
-      setCount(0);
-    }
-    // setInterval(() => setCount(count + 1), 1000);
-  }, [count]);
+  li {
+    list-style-type: none;
+  }
+
+  ul {
+    padding-inline-start: 0;
+  }
+
+  a {
+    text-decoration: none;
+  }
+`;
+
+const StyledLink = styled(Link)`
+  font-size: 4em;
+  font-weight: 800;
+  color: #efcb5d;
+`;
+
+export default function App() {
+  const { pathname } = useLocation();
 
   return (
-    <>
-      <div className="card">
-        6
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <Root>
+      {pathname.endsWith("/") && (
+        <nav>
+          <StyledLink to="/svettis/exercises">Exercises</StyledLink>
+          <br />
+          <StyledLink to="/svettis/practices">Practices</StyledLink>
+        </nav>
+      )}
+      <Outlet />
+    </Root>
   );
 }
-
-export default App;
