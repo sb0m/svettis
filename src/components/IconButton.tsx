@@ -2,18 +2,57 @@ import { ReactNode } from "react";
 import { Link } from "react-router-dom";
 import { styled } from "styled-components";
 
-const HomeLink = styled(Link)`
-  border-radius: 50%;
-  background-color: #59c9a5;
+const StyledLink = styled(Link)`
+  border-radius: 6px;
+  background-color: #5b6c5d;
   width: fit-content;
-  padding: 0.8em;
-  box-shadow: 12px 12px 2px 1px black;
+  display: inline-flex;
+  box-shadow: 1px 2px 6px #202621;
+  color: #e7bb41;
+  margin: 0.5em;
+  height: 48px;
+  width: 48px;
+  justify-content: center;
+  align-items: center;
+
+  svg {
+    height: 36px;
+    width: 36px;
+  }
+`;
+
+const StyledButton = styled.button`
+  border-radius: 6px;
+  background-color: #5b6c5d;
+  width: fit-content;
+  display: inline-flex;
+  box-shadow: 1px 2px 6px #202621;
+  color: #e7bb41;
+  margin: 0.5em;
+  height: 48px;
+  width: 48px;
+  justify-content: center;
+  align-items: center;
+
+  svg {
+    height: 36px;
+    width: 36px;
+  }
 `;
 
 type IconButtonProps = {
   link?: string;
-  icon?: ReactNode;
+  icon: ReactNode;
+  onTouch?(): void;
 };
 
-export const IconButton = (props: IconButtonProps) =>
-  props.icon ? <HomeLink to={props?.link || ""}>{props.icon}</HomeLink> : <></>;
+export const IconButton = (props: IconButtonProps) => {
+  // onTouch?
+  return props.icon && props.link ? (
+    <StyledLink to={props.link || ""}>{props.icon}</StyledLink>
+  ) : (
+    <StyledButton onClick={() => props.onTouch && props.onTouch()}>
+      {props.icon}
+    </StyledButton>
+  );
+};

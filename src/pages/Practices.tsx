@@ -1,7 +1,7 @@
-import { FcHome, FcSearch, FcStart } from "react-icons/fc";
+import { BsFillHouseFill, BsSearch, BsFillPlayBtnFill } from "react-icons/bs";
 import { styled } from "styled-components";
 import { IconButton } from "../components/IconButton";
-import { practice1, practice2, practice3 } from "../data/practices";
+import { practices } from "../data/practices";
 import { Practice } from "../types/types";
 
 const Container = styled.div`
@@ -11,11 +11,15 @@ const Container = styled.div`
   width: 100%;
 `;
 
+const ButtonContainer = styled.span``;
+
 const StyledName = styled.span`
   font-size: 3em;
 `;
 
 const StyledListItem = styled.ul`
+  display: flex;
+  justify-content: space-around;
   font-weight: 800;
   color: #5b6c5d;
 `;
@@ -27,6 +31,7 @@ const StyledList = styled.li`
     background-color: #ef6f6c;
     margin-bottom: 1em;
     padding: 1em 0;
+    box-shadow: 1px 3px 12px #3f1b1a;
   }
 `;
 
@@ -39,18 +44,16 @@ const List = (props: ListProps) => (
     {props.list.map((listEl) => (
       <StyledListItem key={listEl.name}>
         <StyledName>{listEl.name}</StyledName>
-        <span>
+        <ButtonContainer>
           <IconButton
             link={`/svettis/${listEl.name}/play`}
-            icon={<FcStart />}
+            icon={<BsFillPlayBtnFill />}
           />
-        </span>
-        <span>
           <IconButton
             link={`/svettis/${listEl.name}/display`}
-            icon={<FcSearch />}
+            icon={<BsSearch />}
           />
-        </span>
+        </ButtonContainer>
       </StyledListItem>
     ))}
   </StyledList>
@@ -62,8 +65,8 @@ export const Practices = () => {
       <h1>PRACTICES</h1>
       <br />
       {/* <IconButton link={`/svettis/add-practice`} icon={<FcPlus />} /> */}
-      <List list={[practice1, practice2, practice3]} />
-      <IconButton link="/svettis/" icon={<FcHome />} />
+      <List list={practices} />
+      <IconButton link="/svettis/" icon={<BsFillHouseFill />} />
     </Container>
   );
 };

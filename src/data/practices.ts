@@ -1,17 +1,22 @@
 import { Practice } from "../types/types";
-import { exercise1, exercise2, exercise3, exercise4 } from "./exercises";
+import { exercises } from "./exercises";
 
 export const practice1: Practice = {
   name: "practice1",
-  exercises: [exercise1, exercise2, exercise3, exercise4],
+  break: 10,
+  exercises: [exercises[1], exercises[2]],
 };
 
 export const practice2: Practice = {
   name: "practice2",
-  exercises: [exercise1, exercise2, exercise3, exercise4],
+  break: 10,
+  exercises: [...exercises],
 };
 
 export const practice3: Practice = {
   name: "practice3",
-  exercises: [exercise1, exercise2, exercise3, exercise4],
+  break: 20,
+  exercises: [...exercises],
 };
+
+export const practices = [practice1, practice2, practice3];
