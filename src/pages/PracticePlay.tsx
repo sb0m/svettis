@@ -2,6 +2,7 @@ import {
   BsFillHouseFill,
   BsFillArrowLeftSquareFill,
   BsFillPauseCircleFill,
+  BsFillPlayBtnFill,
 } from "react-icons/bs";
 import { styled } from "styled-components";
 import { IconButton } from "../components/IconButton";
@@ -13,6 +14,31 @@ import { useState, useEffect } from "react";
 const Container = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+`;
+
+const PlayerContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-evenly;
+`;
+
+const ButtonRow = styled.div`
+  display: flex;
+  align-self: center;
+`;
+
+const ProgressWrapper = styled.div`
+  width: 100%;
+  height: 2em;
+  background-color: black;
+`;
+
+const ProgressBar = styled.div<{ test: string }>`
+  width: ${(props) => props.test};
+  height: 2em;
+  background-color: 5b6c5d;
 `;
 
 type PlayerProps = {
@@ -40,13 +66,15 @@ const Player = (props: PlayerProps) => {
       if (currentTime >= currentExercise.duration) {
         // new Repetition
         if (currentRepetition < currentExercise.repetition) {
-          setCurrentRepetition((prev) => prev + 1);
-          setCurrentTime(0);
+          const test = () => {
+            setCurrentRepetition((prev) => prev + 1);
+            setCurrentTime(0);
+          };
+          setTimeout(test, currentExercise.break * 1000);
           return;
         } else {
           // end of practice
           if (currentExerciseIndex >= props.practice.exercises.length - 1) {
-            console.log("end ");
             setIsPlaying(false);
             setCurrentExercise(props.practice.exercises[0]);
             setCurrentTime(0);
@@ -65,7 +93,7 @@ const Player = (props: PlayerProps) => {
         currentTime <= currentExercise.duration
       ) {
         const intervalId = setInterval(() => {
-          setCurrentTime((t) => t + 10);
+          setCurrentTime((t) => t + 1);
         }, 1000);
 
         return () => clearInterval(intervalId);
@@ -81,22 +109,40 @@ const Player = (props: PlayerProps) => {
     props.practice.break,
   ]);
 
-  console.log("currentExercise ", currentExercise, isPlaying);
+  type ProgressProps = {
+    time: number;
+    duration: number;
+  };
+
+  const Progress = (props: ProgressProps) => (
+    <ProgressWrapper>
+      <ProgressBar
+        test={parseInt((props.time / props.duration) * 100 + "") + "%"}
+      ></ProgressBar>
+    </ProgressWrapper>
+  );
 
   return currentExercise ? (
-    <div style={{ display: "flex", flexDirection: "column" }}>
-      <span>currentExercise {currentExercise.name}</span>
+    <PlayerContainer>
+      <span>current exercise - {currentExercise.name}</span>
+      <Progress time={currentTime} duration={currentExercise.duration} />
+      {/*TODO: show break when a break*/}
       <span>currentTime {currentTime}</span>
-      <span>currentExerciseIndex {currentExerciseIndex}</span>
       <span>currentExercise.duration {currentExercise.duration}</span>
       <span>currentRepetition {currentRepetition}</span>
       <span>currentExercise.repetition {currentExercise.repetition}</span>
       <span>props.practice.break * 10000 {props.practice.break * 1000}</span>
-      <IconButton
-        onTouch={() => setIsPlaying(false)}
-        icon={<BsFillPauseCircleFill />}
-      />
-    </div>
+      <ButtonRow>
+        <IconButton
+          onTouch={() => setIsPlaying(false)}
+          icon={<BsFillPauseCircleFill />}
+        />
+        <IconButton
+          onTouch={() => setIsPlaying(true)}
+          icon={<BsFillPlayBtnFill />}
+        />
+      </ButtonRow>
+    </PlayerContainer>
   ) : (
     <>No exercise</>
   );
@@ -111,11 +157,13 @@ export const PracticePlay = () => {
     <Container>
       <h1>PLAY {practiceName}</h1>
       {practice && <Player practice={practice} />}
-      <IconButton
-        link="/svettis/practices"
-        icon={<BsFillArrowLeftSquareFill />}
-      />
-      <IconButton link="/svettis/" icon={<BsFillHouseFill />} />
+      <ButtonRow>
+        <IconButton
+          link="/svettis/practices"
+          icon={<BsFillArrowLeftSquareFill />}
+        />
+        <IconButton link="/svettis/" icon={<BsFillHouseFill />} />
+      </ButtonRow>
     </Container>
   );
 };

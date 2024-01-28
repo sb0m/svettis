@@ -14,10 +14,20 @@ const StyledLink = styled(Link)`
   width: 48px;
   justify-content: center;
   align-items: center;
+  transition: 0.2s ease-in-out;
 
   svg {
     height: 36px;
     width: 36px;
+  }
+
+  &:hover {
+    background-color: #738776;
+  }
+
+  &:active {
+    box-shadow: 1px 2px 6px transparent;
+    translate: 1px 2px;
   }
 `;
 
@@ -33,10 +43,22 @@ const StyledButton = styled.button`
   width: 48px;
   justify-content: center;
   align-items: center;
+  border: none;
+  outline: none;
+  transition: 0.2s ease-in-out;
 
   svg {
     height: 36px;
     width: 36px;
+  }
+
+  &:hover {
+    background-color: #738776;
+  }
+
+  &:active {
+    box-shadow: 1px 2px 6px transparent;
+    translate: 1px 2px;
   }
 `;
 
@@ -51,7 +73,10 @@ export const IconButton = (props: IconButtonProps) => {
   return props.icon && props.link ? (
     <StyledLink to={props.link || ""}>{props.icon}</StyledLink>
   ) : (
-    <StyledButton onClick={() => props.onTouch && props.onTouch()}>
+    <StyledButton
+      onTouchStart={() => props.onTouch && props.onTouch()}
+      onClick={() => props.onTouch && props.onTouch()}
+    >
       {props.icon}
     </StyledButton>
   );

@@ -1,4 +1,4 @@
-import { FcHome } from "react-icons/fc";
+import { BsFillHouseFill } from "react-icons/bs";
 import { styled } from "styled-components";
 import { IconButton } from "../components/IconButton";
 
@@ -12,7 +12,7 @@ export const Exercises = () => {
     <Container>
       <div>EXERCICES</div>
       <br />
-      <IconButton link="/svettis/" icon={<FcHome />} />
+      <IconButton link="/svettis/" icon={<BsFillHouseFill />} />
     </Container>
   );
 };
