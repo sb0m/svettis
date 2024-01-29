@@ -1,7 +1,14 @@
-import { BsFillHouseFill, BsSearch, BsFillPlayBtnFill } from "react-icons/bs";
+import {
+  BsFillHouseFill,
+  BsFillPlayBtnFill,
+  BsFillPlusCircleFill,
+  BsSearch,
+} from "react-icons/bs";
+import { useIndexedDB } from "react-indexed-db-hook";
+import { useDispatch, useSelector } from "react-redux";
 import { styled } from "styled-components";
 import { IconButton } from "../components/IconButton";
-import { practices } from "../data/practices";
+import { addPractice } from "../store/slice";
 import { Practice } from "../types/types";
 
 const Container = styled.div`
@@ -59,12 +66,54 @@ const List = (props: ListProps) => (
   </StyledList>
 );
 
+// function ByID() {
+//   const { getByID } = useIndexedDB("people");
+//   const [person, setPerson] = useState();
+
+//   useEffect(() => {
+//     getById(1).then((personFromDB) => {
+//       setPerson(personFromDB);
+//     });
+//   }, []);
+
+//   return <div>{person}</div>;
+// }
+
 export const Practices = () => {
+  // A hook to access the redux dispatch function.
+  // This is the only way to trigger a state change.
+  const dispatch = useDispatch();
+
+  // A hook to access the redux store's state.
+  // This hook takes a selector function as an argument.
+  // The selector is called with the store state.
+  // state.todos.todos - todos is the name of the reducer and the name of the variable in the initialState.
+
+  // eslint-disable-next-line
+  // @ts-ignore
+  const practices = useSelector((state) => state.practices.practices);
+  // A function to handle the add button.
+  const handleAdd = () => {
+    // Dispatch an action to add a todo.
+    dispatch(
+      addPractice({
+        id: Math.floor(Math.random() * 1000),
+      })
+    );
+  };
+
+  const db = useIndexedDB("exercises");
+  const db2 = useIndexedDB("practices");
+  console.log("JSON.stringify(db) ", JSON.stringify(db), JSON.stringify(db2));
   return (
     <Container>
       <h1>PRACTICES</h1>
       <br />
-      {/* <IconButton link={`/svettis/add-practice`} icon={<FcPlus />} /> */}
+      <IconButton
+        onTouch={handleAdd}
+        link={`/svettis/add-practice`}
+        icon={<BsFillPlusCircleFill />}
+      />
       <List list={practices} />
       <IconButton link="/svettis/" icon={<BsFillHouseFill />} />
     </Container>

@@ -5,6 +5,8 @@ const exercise1: Exercise = {
   duration: 40,
   repetition: 3,
   break: 20,
+  image: "",
+  description: "description description description description",
 };
 
 const exercise2: Exercise = {
@@ -12,6 +14,8 @@ const exercise2: Exercise = {
   duration: 50,
   repetition: 2,
   break: 10,
+  image: "",
+  description: "description description description description",
 };
 
 const exercise3: Exercise = {
@@ -19,6 +23,8 @@ const exercise3: Exercise = {
   duration: 30,
   repetition: 3,
   break: 30,
+  image: "",
+  description: "description description description description",
 };
 
 const exercise4: Exercise = {
@@ -26,6 +32,8 @@ const exercise4: Exercise = {
   duration: 60,
   repetition: 1,
   break: 0,
+  image: "",
+  description: "description description description description",
 };
 
 export const exercises = [exercise1, exercise2, exercise3, exercise4];

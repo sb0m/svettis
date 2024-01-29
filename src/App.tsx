@@ -1,5 +1,7 @@
+import { initDB } from "react-indexed-db-hook";
 import { Link, Outlet, useLocation } from "react-router-dom";
 import { styled } from "styled-components";
+import { DBConfig } from "./DBConfig";
 
 const Root = styled.div`
   width: 100%;
@@ -29,6 +31,8 @@ const StyledLink = styled(Link)`
   font-weight: 800;
   color: #efcb5d;
 `;
+
+initDB(DBConfig);
 
 export default function App() {
   const { pathname } = useLocation();
