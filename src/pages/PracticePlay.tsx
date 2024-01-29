@@ -1,15 +1,16 @@
+import { useEffect, useState } from "react";
 import {
-  BsFillHouseFill,
   BsFillArrowLeftSquareFill,
+  BsFillHouseFill,
   BsFillPauseCircleFill,
   BsFillPlayBtnFill,
 } from "react-icons/bs";
-import { styled } from "styled-components";
-import { IconButton } from "../components/IconButton";
 import { useLocation } from "react-router-dom";
+import { styled } from "styled-components";
+import stop from "../assets/stop.mp3";
+import { IconButton } from "../components/IconButton";
 import { practices } from "../data/practices";
 import { Practice } from "../types/types";
-import { useState, useEffect } from "react";
 
 const Container = styled.div`
   display: flex;
@@ -35,8 +36,8 @@ const ProgressWrapper = styled.div`
   background-color: black;
 `;
 
-const ProgressBar = styled.div<{ test: string }>`
-  width: ${(props) => props.test};
+const ProgressBar = styled.div<{ width: string }>`
+  width: ${(props) => props.width};
   height: 2em;
   background-color: 5b6c5d;
 `;
@@ -53,6 +54,8 @@ const Player = (props: PlayerProps) => {
   const [currentExerciseIndex, setCurrentExerciseIndex] = useState(0);
   const [currentRepetition, setCurrentRepetition] = useState(1);
   const [isPlaying, setIsPlaying] = useState(true);
+  const [isPause, setIsPause] = useState(false);
+  const [currentPauseTime, setCurrentPauseTime] = useState(0);
 
   useEffect(() => {
     const switchExercise = () => {
@@ -61,16 +64,19 @@ const Player = (props: PlayerProps) => {
       setCurrentExercise(props.practice.exercises[newExerciseIndex]);
       setCurrentTime(0);
       setCurrentRepetition(1);
+      setIsPause(false);
+    };
+    const addRepetition = () => {
+      setCurrentRepetition((prev) => prev + 1);
+      setCurrentTime(0);
+      setIsPause(false);
     };
     if (isPlaying) {
       if (currentTime >= currentExercise.duration) {
         // new Repetition
         if (currentRepetition < currentExercise.repetition) {
-          const test = () => {
-            setCurrentRepetition((prev) => prev + 1);
-            setCurrentTime(0);
-          };
-          setTimeout(test, currentExercise.break * 1000);
+          setIsPause(true);
+          setTimeout(addRepetition, currentExercise.break * 1000);
           return;
         } else {
           // end of practice
@@ -83,6 +89,7 @@ const Player = (props: PlayerProps) => {
             return;
           }
           // new Exercise
+          setIsPause(true);
           setTimeout(switchExercise, props.practice.break * 1000);
           return;
         }
@@ -117,21 +124,34 @@ const Player = (props: PlayerProps) => {
   const Progress = (props: ProgressProps) => (
     <ProgressWrapper>
       <ProgressBar
-        test={parseInt((props.time / props.duration) * 100 + "") + "%"}
+        width={parseInt((props.time / props.duration) * 100 + "") + "%"}
       ></ProgressBar>
+      {`Seconds - ${props.time} / ${props.duration}`}
     </ProgressWrapper>
   );
 
+  const Break = () => (
+    <>{`BREAK - ${currentPauseTime} / ${currentExercise.break}`}</>
+  );
+
+  // const audio = new Audio('http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/alien_shoot.wav');
+  // audio.play();
+
+  const audio = new Audio(stop);
+  audio.play();
+
   return currentExercise ? (
     <PlayerContainer>
-      <span>current exercise - {currentExercise.name}</span>
-      <Progress time={currentTime} duration={currentExercise.duration} />
+      <span>Exercise - {currentExercise.name}</span>
+      {isPause ? (
+        <Break />
+      ) : (
+        <Progress time={currentTime} duration={currentExercise.duration} />
+      )}
       {/*TODO: show break when a break*/}
-      <span>currentTime {currentTime}</span>
-      <span>currentExercise.duration {currentExercise.duration}</span>
-      <span>currentRepetition {currentRepetition}</span>
-      <span>currentExercise.repetition {currentExercise.repetition}</span>
-      <span>props.practice.break * 10000 {props.practice.break * 1000}</span>
+      <span>
+        Repetition - {currentRepetition} / {currentExercise.repetition}
+      </span>
       <ButtonRow>
         <IconButton
           onTouch={() => setIsPlaying(false)}
@@ -157,6 +177,7 @@ export const PracticePlay = () => {
     <Container>
       <h1>PLAY {practiceName}</h1>
       {practice && <Player practice={practice} />}
+
       <ButtonRow>
         <IconButton
           link="/svettis/practices"
