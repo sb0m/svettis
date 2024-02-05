@@ -4,11 +4,9 @@ import {
   BsFillPlusCircleFill,
   BsSearch,
 } from "react-icons/bs";
-import { useIndexedDB } from "react-indexed-db-hook";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { styled } from "styled-components";
 import { IconButton } from "../components/IconButton";
-import { addPractice } from "../store/slice";
 import { Practice } from "../types/types";
 
 const Container = styled.div`
@@ -48,8 +46,8 @@ type ListProps = {
 
 const List = (props: ListProps) => (
   <StyledList>
-    {props.list.map((listEl) => (
-      <StyledListItem key={listEl.name}>
+    {props.list.map((listEl, key) => (
+      <StyledListItem key={key}>
         <StyledName>{listEl.name}</StyledName>
         <ButtonContainer>
           <IconButton
@@ -79,10 +77,28 @@ const List = (props: ListProps) => (
 //   return <div>{person}</div>;
 // }
 
+// function AddMore() {
+//   const { add } = useIndexedDB("people");
+//   const [person, setPerson] = useState();
+
+//   const handleClick = () => {
+//     add({ name: "name", email: "email" }).then(
+//       (event) => {
+//         console.log("ID Generated: ", event.target.result);
+//       },
+//       (error) => {
+//         console.log(error);
+//       },
+//     );
+//   };
+
+//   return <button onClick={handleClick}>Add</button>;
+// }
+
 export const Practices = () => {
   // A hook to access the redux dispatch function.
   // This is the only way to trigger a state change.
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   // A hook to access the redux store's state.
   // This hook takes a selector function as an argument.
@@ -92,29 +108,17 @@ export const Practices = () => {
   // eslint-disable-next-line
   // @ts-ignore
   const practices = useSelector((state) => state.practices.practices);
-  // A function to handle the add button.
-  const handleAdd = () => {
-    // Dispatch an action to add a todo.
-    dispatch(
-      addPractice({
-        id: Math.floor(Math.random() * 1000),
-      })
-    );
-  };
 
-  const db = useIndexedDB("exercises");
-  const db2 = useIndexedDB("practices");
-  console.log("JSON.stringify(db) ", JSON.stringify(db), JSON.stringify(db2));
   return (
     <Container>
       <h1>PRACTICES</h1>
       <br />
       <IconButton
-        onTouch={handleAdd}
+        // onTouch={handleAdd}
         link={`/svettis/add-practice`}
         icon={<BsFillPlusCircleFill />}
       />
-      <List list={practices} />
+      {practices.length ? <List list={practices} /> : <>No List</>}
       <IconButton link="/svettis/" icon={<BsFillHouseFill />} />
     </Container>
   );

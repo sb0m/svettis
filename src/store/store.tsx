@@ -1,7 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
 
-import practicesReducer from "./slice";
+import exercicesReducer from "./slice_exercises";
+import practicesReducer from "./slice_practices";
 
-const store = configureStore({ reducer: { practices: practicesReducer } });
+const store = configureStore({
+  reducer: { practices: practicesReducer, exercises: exercicesReducer },
+});
 
 export default store;
