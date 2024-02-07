@@ -12,7 +12,6 @@ export interface Exercise {
 export interface Practice {
   id: number;
   name: string;
-  // indexed DB: exercise id
   exercises: Exercise[];
   break: number;
   undeletable: boolean;

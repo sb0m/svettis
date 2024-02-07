@@ -28,7 +28,7 @@ export const ExerciseAdd = () => {
   const [name, setName] = useState<string>("");
   const [breakNumber, setBreakNumber] = useState<string>("");
 
-  const { add } = useIndexedDB("practices");
+  const { add } = useIndexedDB("exercises");
   const dispatch = useDispatch();
 
   const handleAdd = () => {

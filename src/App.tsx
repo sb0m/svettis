@@ -66,7 +66,7 @@ export default function App() {
       });
     }
     if (exercises.length === 0) {
-      getAllExercises().then((fromdb) => {
+      getAllExercises().then((fromdb: Exercise[]) => {
         const allExistingExercises = [...dataExercises, ...fromdb];
         setExercisesFromDb(allExistingExercises);
       });
