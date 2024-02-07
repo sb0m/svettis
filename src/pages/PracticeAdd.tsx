@@ -5,11 +5,11 @@ import {
   BsFillPlusCircleFill,
 } from "react-icons/bs";
 import { useIndexedDB } from "react-indexed-db-hook";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { styled } from "styled-components";
 import { IconButton } from "../components/IconButton";
-import { exercises } from "../data/exercises";
 import { addPractice } from "../store/slice_practices";
+import { IRootState } from "../store/store.tsx";
 import { Exercise } from "../types/types";
 
 const Container = styled.div`
@@ -31,11 +31,15 @@ const ButtonContainer = styled.div`
 `;
 
 export const PracticeAdd = () => {
+  const exercises = useSelector(
+    (state: IRootState) => state.exercises.exercises
+  );
+
   const [name, setName] = useState<string>("");
   const [breakNumber, setBreakNumber] = useState<string>("");
   const [selectedExercises, setSelectedExercises] = useState<Exercise[]>([]);
   const [selectedExerciseName, setSelectedExerciseName] = useState<string>(
-    exercises[0].name
+    exercises[0]?.name
   );
 
   const { add } = useIndexedDB("practices");
