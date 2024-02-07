@@ -1,26 +1,30 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { exercises } from "../data/exercises";
+import { Exercise } from "../types/types";
 
-const initialState = {
-  //reducer2
-  exercises: [...exercises],
+type ExerciseState = {
+  exercises: Exercise[];
+};
+
+const initialState: ExerciseState = {
+  exercises: [],
 };
 
 export const exercicesSlice = createSlice({
-  name: "practices",
+  name: "exercises",
   initialState,
   reducers: {
-    // eslint-disable-next-line
-    // @ts-ignore
     addExercise: (state, action) => {
-      console.log("addPractice");
-      const newnew = action.payload;
-      state.exercises.push(newnew);
+      state.exercises.push(action.payload);
+    },
+    deleteExercise: (state, action) => {
+      state.exercises = state.exercises.filter(
+        (item) => item.id !== action.payload
+      );
     },
   },
 });
 
-export const { addExercise } = exercicesSlice.actions;
+export const { addExercise, deleteExercise } = exercicesSlice.actions;
 
 export default exercicesSlice.reducer;
 

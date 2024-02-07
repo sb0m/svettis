@@ -1,12 +1,16 @@
 import {
+  BsFillDashCircleFill,
   BsFillHouseFill,
   BsFillPlayBtnFill,
   BsFillPlusCircleFill,
   BsSearch,
 } from "react-icons/bs";
-import { useSelector } from "react-redux";
+import { useIndexedDB } from "react-indexed-db-hook";
+import { useDispatch, useSelector } from "react-redux";
 import { styled } from "styled-components";
 import { IconButton } from "../components/IconButton";
+import { deletePractice } from "../store/slice_practices";
+import { IRootState } from "../store/store.tsx";
 import { Practice } from "../types/types";
 
 const Container = styled.div`
@@ -24,76 +28,35 @@ const StyledName = styled.span`
 
 const StyledListItem = styled.ul`
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   font-weight: 800;
   color: #5b6c5d;
 `;
 
 const StyledList = styled.li`
   width: 100%;
+  overflow: scroll;
+  flex: 18;
 
   ul {
     background-color: #ef6f6c;
     margin-bottom: 1em;
-    padding: 1em 0;
+    padding: 1em 1em;
     box-shadow: 1px 3px 12px #3f1b1a;
   }
+`;
+
+const StyledAddButtonRow = styled.div`
+  flex: 1;
+`;
+
+const StyledHomeButtonRow = styled.div`
+  flex: 1;
 `;
 
 type ListProps = {
   list: Practice[];
 };
-
-const List = (props: ListProps) => (
-  <StyledList>
-    {props.list.map((listEl, key) => (
-      <StyledListItem key={key}>
-        <StyledName>{listEl.name}</StyledName>
-        <ButtonContainer>
-          <IconButton
-            link={`/svettis/${listEl.name}/play`}
-            icon={<BsFillPlayBtnFill />}
-          />
-          <IconButton
-            link={`/svettis/${listEl.name}/display`}
-            icon={<BsSearch />}
-          />
-        </ButtonContainer>
-      </StyledListItem>
-    ))}
-  </StyledList>
-);
-
-// function ByID() {
-//   const { getByID } = useIndexedDB("people");
-//   const [person, setPerson] = useState();
-
-//   useEffect(() => {
-//     getById(1).then((personFromDB) => {
-//       setPerson(personFromDB);
-//     });
-//   }, []);
-
-//   return <div>{person}</div>;
-// }
-
-// function AddMore() {
-//   const { add } = useIndexedDB("people");
-//   const [person, setPerson] = useState();
-
-//   const handleClick = () => {
-//     add({ name: "name", email: "email" }).then(
-//       (event) => {
-//         console.log("ID Generated: ", event.target.result);
-//       },
-//       (error) => {
-//         console.log(error);
-//       },
-//     );
-//   };
-
-//   return <button onClick={handleClick}>Add</button>;
-// }
 
 export const Practices = () => {
   // A hook to access the redux dispatch function.
@@ -105,21 +68,77 @@ export const Practices = () => {
   // The selector is called with the store state.
   // state.todos.todos - todos is the name of the reducer and the name of the variable in the initialState.
 
-  // eslint-disable-next-line
-  // @ts-ignore
-  const practices = useSelector((state) => state.practices.practices);
+  const practices = useSelector(
+    (state: IRootState) => state.practices.practices
+  );
+  const { deleteRecord } = useIndexedDB("practices");
+  const dispatch = useDispatch();
+
+  const openDialog = (practiceName: string, practiceId: number) => {
+    const text =
+      "Do you really want to delete practice with name " +
+      { practiceName } +
+      "?";
+    if (confirm(text) == true) {
+      handleDelete(practiceId);
+    }
+  };
+
+  const handleDelete = (practiceId: number) => {
+    deleteRecord(practiceId).then(
+      (event) => {
+        console.log("ID Generated: ", event);
+        const deleteEl = practices.find((el: Practice) => el.id === practiceId);
+        if (deleteEl) {
+          dispatch(deletePractice(deleteEl.id));
+        }
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  };
+
+  const List = (props: ListProps) => (
+    <StyledList>
+      {props.list.map((listEl, key) => (
+        <StyledListItem key={key}>
+          <StyledName>{listEl.name}</StyledName>
+          <ButtonContainer>
+            <IconButton
+              link={`/svettis/practices/${listEl.id}/play`}
+              icon={<BsFillPlayBtnFill />}
+            />
+            <IconButton
+              link={`/svettis/practices/${listEl.id}/display`}
+              icon={<BsSearch />}
+            />
+            {!listEl.undeletable && (
+              <IconButton
+                onTouch={() => openDialog(listEl.name, listEl.id)}
+                icon={<BsFillDashCircleFill />}
+              />
+            )}
+          </ButtonContainer>
+        </StyledListItem>
+      ))}
+    </StyledList>
+  );
 
   return (
     <Container>
       <h1>PRACTICES</h1>
-      <br />
-      <IconButton
-        // onTouch={handleAdd}
-        link={`/svettis/add-practice`}
-        icon={<BsFillPlusCircleFill />}
-      />
+      <StyledAddButtonRow>
+        <IconButton
+          // onTouch={handleAdd}
+          link={`/svettis/add-practice`}
+          icon={<BsFillPlusCircleFill />}
+        />
+      </StyledAddButtonRow>
       {practices.length ? <List list={practices} /> : <>No List</>}
-      <IconButton link="/svettis/" icon={<BsFillHouseFill />} />
+      <StyledHomeButtonRow>
+        <IconButton link="/svettis/" icon={<BsFillHouseFill />} />
+      </StyledHomeButtonRow>
     </Container>
   );
 };

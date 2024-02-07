@@ -1,6 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { Practice } from "../types/types";
 
-const initialState = {
+type PracticeState = {
+  practices: Practice[];
+};
+
+const initialState: PracticeState = {
   practices: [],
 };
 
@@ -9,15 +14,17 @@ export const practicesSlice = createSlice({
   initialState,
   reducers: {
     addPractice: (state, action) => {
-      console.log("addPractice ", state, action.payload);
-      // eslint-disable-next-line
-      // @ts-ignore
       state.practices.push(action.payload);
+    },
+    deletePractice: (state, action) => {
+      state.practices = state.practices.filter(
+        (item) => item.id !== action.payload
+      );
     },
   },
 });
 
-export const { addPractice } = practicesSlice.actions;
+export const { addPractice, deletePractice } = practicesSlice.actions;
 
 export default practicesSlice.reducer;
 

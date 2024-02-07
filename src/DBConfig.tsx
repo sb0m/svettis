@@ -20,6 +20,11 @@ export const DBConfig = {
           keypath: "description",
           options: { unique: false },
         },
+        {
+          name: "undeletable",
+          keypath: "undeletable",
+          options: { unique: false },
+        },
       ],
     },
     {
@@ -28,6 +33,23 @@ export const DBConfig = {
       storeSchema: [
         { name: "name", keypath: "name", options: { unique: true } },
         { name: "break", keypath: "break", options: { unique: false } },
+        { name: "duration", keypath: "duration", options: { unique: false } },
+        {
+          name: "repetition",
+          keypath: "repetition",
+          options: { unique: false },
+        },
+        { name: "image", keypath: "image", options: { unique: false } },
+        {
+          name: "description",
+          keypath: "description",
+          options: { unique: false },
+        },
+        {
+          name: "undeletable",
+          keypath: "undeletable",
+          options: { unique: false },
+        },
       ],
     },
   ],

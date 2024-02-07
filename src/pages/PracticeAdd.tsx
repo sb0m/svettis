@@ -10,10 +10,20 @@ import { styled } from "styled-components";
 import { IconButton } from "../components/IconButton";
 import { exercises } from "../data/exercises";
 import { addPractice } from "../store/slice_practices";
+import { Exercise } from "../types/types";
 
 const Container = styled.div`
   display: flex;
   flex-direction: column;
+`;
+
+const FormContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const SelectRow = styled.div`
+  display: flex;
 `;
 
 const ButtonContainer = styled.div`
@@ -23,27 +33,35 @@ const ButtonContainer = styled.div`
 export const PracticeAdd = () => {
   const [name, setName] = useState<string>("");
   const [breakNumber, setBreakNumber] = useState<string>("");
+  const [selectedExercises, setSelectedExercises] = useState<Exercise[]>([]);
+  const [selectedExerciseName, setSelectedExerciseName] = useState<string>(
+    exercises[0].name
+  );
 
   const { add } = useIndexedDB("practices");
   const dispatch = useDispatch();
-  // A function to handle the add button.
+
   const handleAdd = () => {
-    // Dispatch an action to add a todo.
-    console.log("add ", name, breakNumber);
-    dispatch(
-      addPractice({
-        name: name,
-        break: parseInt(breakNumber),
-        exercises: [exercises[1], exercises[2]],
-      })
-    );
     add({
       name: name,
       break: parseInt(breakNumber),
-      exercises: [exercises[1], exercises[2]],
+      exercises: selectedExercises,
     }).then(
       (event) => {
         console.log("ID Generated: ", event);
+        dispatch(
+          addPractice({
+            id: event,
+            name: name,
+            break: parseInt(breakNumber),
+            exercises: selectedExercises,
+            undeletable: false,
+          })
+        );
+        setName("");
+        setBreakNumber("");
+        setSelectedExercises([]);
+        setSelectedExerciseName(exercises[0].name);
       },
       (error) => {
         console.log(error);
@@ -51,37 +69,66 @@ export const PracticeAdd = () => {
     );
   };
 
-  console.log("name ", name, breakNumber);
+  const handleAddExercise = (): void => {
+    const ex: Exercise | undefined = exercises.find(
+      (ex) => ex.name === selectedExerciseName
+    );
+    if (ex) {
+      const newSelectedExercises = [...selectedExercises];
+      newSelectedExercises.push(ex);
+      setSelectedExercises(newSelectedExercises);
+    }
+  };
 
   return (
     <Container>
       <h1>ADD PRACTICE</h1>
-      <form>
+
+      <FormContainer>
         <label htmlFor="name">Name:</label>
-        <br />
         <input
           type="text"
           id="name"
           name="name"
-          // value={name}
           onChange={(event) => setName(event.target.value)}
+          value={name}
         />
-        <br />
         <label htmlFor="break">Break:</label>
-        <br />
         <input
           type="number"
           id="break"
           name="break"
-          // value={breakNumber}
           onChange={(event) => setBreakNumber(event.target.value)}
+          value={breakNumber}
         />
-        <br />
-        {/* <input type="submit" /> */}
+        <label htmlFor="exercises">Exercises:</label>
+        {selectedExercises.length ? (
+          selectedExercises.map((exercise, key) => (
+            <p key={key + exercise.name}>{exercise.name}</p>
+          ))
+        ) : (
+          <>No List</>
+        )}
+        <SelectRow>
+          <select
+            name="exercises"
+            id="exercises"
+            onChange={(event) => setSelectedExerciseName(event.target.value)}
+          >
+            {exercises.map((exercise) => (
+              <option key={exercise.name} value={exercise.name}>
+                {exercise.name}
+              </option>
+            ))}
+          </select>
+          <IconButton
+            onTouch={() => handleAddExercise()}
+            icon={<BsFillPlusCircleFill />}
+          />
+        </SelectRow>
         <IconButton onTouch={handleAdd} icon={<BsFillPlusCircleFill />} />
-      </form>
+      </FormContainer>
 
-      <br />
       <ButtonContainer>
         <IconButton
           link="/svettis/practices"

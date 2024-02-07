@@ -4,7 +4,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, Outlet, useLocation } from "react-router-dom";
 import { styled } from "styled-components";
 import { DBConfig } from "./DBConfig";
+import { exercises as dataExercises } from "./data/exercises";
+import { practices as dataPractices } from "./data/practices";
+import { addExercise } from "./store/slice_exercises.tsx";
 import { addPractice } from "./store/slice_practices.tsx";
+import { IRootState } from "./store/store.tsx";
+import { Exercise, Practice } from "./types/types";
 
 const Root = styled.div`
   width: 100%;
@@ -38,33 +43,51 @@ const StyledLink = styled(Link)`
 initDB(DBConfig);
 
 export default function App() {
-  const { getAll } = useIndexedDB("practices");
+  const { getAll: getAllPractices } = useIndexedDB("practices");
+  const { getAll: getAllExercises } = useIndexedDB("exercises");
   const { pathname } = useLocation();
   const dispatch = useDispatch();
-  const [fromdb, setfromdb] = useState([]);
-  // eslint-disable-next-line
-  // @ts-ignore
-  const practices = useSelector((state) => state.practices.practices);
+  const [practicesFromDb, setPracticesFromDb] = useState<Practice[]>([]);
+  const [exercisesFromDb, setExercisesFromDb] = useState<Exercise[]>([]);
 
-  console.log("fromdb ", fromdb);
+  const practices = useSelector(
+    (state: IRootState) => state.practices.practices
+  );
+  const exercises = useSelector(
+    (state: IRootState) => state.exercises.exercises
+  );
 
   useEffect(() => {
-    // eslint-disable-next-line
-    // @ts-ignore
+    // when store exmpty -> copy from DB & data folder -> useState
     if (practices.length === 0) {
-      // eslint-disable-next-line
-      // @ts-ignore
-      getAll().then((fromdb) => setfromdb(fromdb));
+      getAllPractices().then((fromdb: Practice[]) => {
+        const allExistingPractices = [...dataPractices, ...fromdb];
+        setPracticesFromDb(allExistingPractices);
+      });
+    }
+    if (exercises.length === 0) {
+      getAllExercises().then((fromdb) => {
+        const allExistingExercises = [...dataExercises, ...fromdb];
+        setExercisesFromDb(allExistingExercises);
+      });
     }
   }, []);
 
   useEffect(() => {
-    // eslint-disable-next-line
-    // @ts-ignore
+    // from useState in store
     if (practices.length === 0) {
-      fromdb.forEach((item) => dispatch(addPractice(item)));
+      practicesFromDb.forEach((item) => dispatch(addPractice(item)));
     }
-  }, [fromdb, dispatch, practices.length]);
+    if (exercises.length === 0) {
+      exercisesFromDb.forEach((item) => dispatch(addExercise(item)));
+    }
+  }, [
+    practicesFromDb,
+    exercisesFromDb,
+    dispatch,
+    practices.length,
+    exercises.length,
+  ]);
 
   return (
     <Root>
