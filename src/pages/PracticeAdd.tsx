@@ -1,6 +1,7 @@
 import { useState } from "react";
 import {
   BsFillArrowLeftSquareFill,
+  BsFillFloppyFill,
   BsFillHouseFill,
   BsFillPlusCircleFill,
 } from "react-icons/bs";
@@ -130,7 +131,7 @@ export const PracticeAdd = () => {
             icon={<BsFillPlusCircleFill />}
           />
         </SelectRow>
-        <IconButton onTouch={handleAdd} icon={<BsFillPlusCircleFill />} />
+        <IconButton onTouch={handleAdd} icon={<BsFillFloppyFill />} />
       </FormContainer>
 
       <ButtonContainer>

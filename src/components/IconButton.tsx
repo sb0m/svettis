@@ -46,6 +46,7 @@ const StyledButton = styled.button`
   border: none;
   outline: none;
   transition: 0.2s ease-in-out;
+  cursor: pointer;
 
   svg {
     height: 36px;

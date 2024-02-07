@@ -1,7 +1,7 @@
 import {
-  BsFillDashCircleFill,
   BsFillHouseFill,
   BsFillPlusCircleFill,
+  BsFillTrash3Fill,
   BsSearch,
 } from "react-icons/bs";
 import { useIndexedDB } from "react-indexed-db-hook";
@@ -101,7 +101,7 @@ export const Exercises = () => {
             {!listEl.undeletable && (
               <IconButton
                 onTouch={() => openDialog(listEl.name, listEl.id)}
-                icon={<BsFillDashCircleFill />}
+                icon={<BsFillTrash3Fill />}
               />
             )}
           </ButtonContainer>

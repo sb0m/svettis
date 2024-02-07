@@ -1,8 +1,8 @@
 import { useState } from "react";
 import {
   BsFillArrowLeftSquareFill,
+  BsFillFloppyFill,
   BsFillHouseFill,
-  BsFillPlusCircleFill,
 } from "react-icons/bs";
 import { useIndexedDB } from "react-indexed-db-hook";
 import { useDispatch } from "react-redux";
@@ -76,7 +76,7 @@ export const ExerciseAdd = () => {
           onChange={(event) => setBreakNumber(event.target.value)}
           value={breakNumber}
         />
-        <IconButton onTouch={handleAdd} icon={<BsFillPlusCircleFill />} />
+        <IconButton onTouch={handleAdd} icon={<BsFillFloppyFill />} />
       </FormContainer>
 
       <ButtonContainer>

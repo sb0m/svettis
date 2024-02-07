@@ -29,7 +29,7 @@ export const ExerciseDisplay = () => {
     <Container>
       <h1>DISPLAY {exercise?.name}</h1>
       {exercise && (
-        <div>
+        <div key={exercise.id}>
           <span>{exercise.name}</span>
           <span>{exercise.duration}</span>
           <span>{exercise.repetition}</span>

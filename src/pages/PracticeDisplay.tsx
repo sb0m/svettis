@@ -31,7 +31,7 @@ export const PracticeDisplay = () => {
       <h1>DISPLAY {practice?.name}</h1>
       {practice &&
         practice.exercises.map((exercise) => (
-          <div>
+          <div key={exercise.id}>
             <span>{exercise.name}</span>
             <span>{exercise.duration}</span>
             <span>{exercise.repetition}</span>
