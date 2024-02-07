@@ -4,7 +4,7 @@ import { useLocation } from "react-router-dom";
 import { styled } from "styled-components";
 import { IconButton } from "../components/IconButton";
 import { IRootState } from "../store/store.tsx";
-import { Practice } from "../types/types";
+import { Exercise } from "../types/types";
 
 const Container = styled.div`
   display: flex;
@@ -15,31 +15,29 @@ const ButtonContainer = styled.div`
   display: flex;
 `;
 
-export const PracticeDisplay = () => {
+export const ExerciseDisplay = () => {
   const { pathname } = useLocation();
-  const practices = useSelector(
-    (state: IRootState) => state.practices.practices
+  const exercises = useSelector(
+    (state: IRootState) => state.exercises.exercises
   );
 
-  const practiceId = parseInt(pathname.split("/")[3], 10);
-  const practice: Practice | undefined = practices.find(
-    (el: Practice) => el.id === practiceId
+  const exerciseId = parseInt(pathname.split("/")[3], 10);
+  const exercise: Exercise | undefined = exercises.find(
+    (el: Exercise) => el.id === exerciseId
   );
-
   return (
     <Container>
-      <h1>DISPLAY {practice?.name}</h1>
-      {practice &&
-        practice.exercises.map((exercise) => (
-          <div>
-            <span>{exercise.name}</span>
-            <span>{exercise.duration}</span>
-            <span>{exercise.repetition}</span>
-          </div>
-        ))}
+      <h1>DISPLAY {exercise?.name}</h1>
+      {exercise && (
+        <div>
+          <span>{exercise.name}</span>
+          <span>{exercise.duration}</span>
+          <span>{exercise.repetition}</span>
+        </div>
+      )}
       <ButtonContainer>
         <IconButton
-          link="/svettis/practices"
+          link="/svettis/exercises"
           icon={<BsFillArrowLeftSquareFill />}
         />
         <IconButton link="/svettis/" icon={<BsFillHouseFill />} />
