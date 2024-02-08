@@ -31,7 +31,7 @@ const StyledLink = styled(Link)`
   }
 `;
 
-const StyledButton = styled.button`
+const StyledButton = styled.button<{ disabled: boolean | undefined }>`
   border-radius: 6px;
   background-color: #5b6c5d;
   width: fit-content;
@@ -46,7 +46,10 @@ const StyledButton = styled.button`
   border: none;
   outline: none;
   transition: 0.2s ease-in-out;
-  cursor: pointer;
+
+  ${(props) => props.disabled && "pointer-events: none;"};
+  ${(props) => props.disabled && "opacity: 30%;"};
+  cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};
 
   svg {
     height: 36px;
@@ -67,18 +70,31 @@ type IconButtonProps = {
   link?: string;
   icon: ReactNode;
   onTouch?(): void;
+  className?: string;
+  disabled?: boolean;
 };
 
-export const IconButton = (props: IconButtonProps) => {
-  // onTouch?
-  return props.icon && props.link ? (
-    <StyledLink to={props.link || ""}>{props.icon}</StyledLink>
+// eslint-disable-next-line
+// @ts-ignore
+export const IconButton = ({
+  link,
+  icon,
+  onTouch,
+  className,
+  disabled,
+}: IconButtonProps) => {
+  return icon && link ? (
+    <StyledLink to={link || ""} className={className}>
+      {icon}
+    </StyledLink>
   ) : (
     <StyledButton
-      onTouchStart={() => props.onTouch && props.onTouch()}
-      onClick={() => props.onTouch && props.onTouch()}
+      className={className}
+      //onTouchStart={() => props.onTouch && props.onTouch()}
+      onClick={() => onTouch && onTouch()}
+      disabled={disabled !== undefined ? disabled : false}
     >
-      {props.icon}
+      {icon}
     </StyledButton>
   );
 };

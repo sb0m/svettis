@@ -22,7 +22,9 @@ const Container = styled.div`
 const ButtonContainer = styled.span``;
 
 const StyledName = styled.span`
-  font-size: 3em;
+  font-size: 2em;
+  display: flex;
+  align-items: center;
 `;
 
 const StyledListItem = styled.ul`
@@ -115,7 +117,6 @@ export const Exercises = () => {
       <h1>EXERCISES</h1>
       <StyledAddButtonRow>
         <IconButton
-          // onTouch={handleAdd}
           link={`/svettis/add-exercise`}
           icon={<BsFillPlusCircleFill />}
         />

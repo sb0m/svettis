@@ -20,6 +20,7 @@ const Root = styled.div`
   font-family: Poor Story, sans-serif;
   color: #e7bb41;
   text-align: center;
+  font-size: 20px;
 
   li {
     list-style-type: none;
