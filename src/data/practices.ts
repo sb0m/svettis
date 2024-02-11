@@ -2,7 +2,7 @@ import { Practice } from "../types/types";
 import { exercises } from "./exercises";
 
 export const practice1: Practice = {
-  id: 0,
+  id: 424242,
   name: "practice1",
   break: 10,
   exercises: [exercises[1], exercises[2]],
@@ -10,7 +10,7 @@ export const practice1: Practice = {
 };
 
 export const practice2: Practice = {
-  id: 1,
+  id: 424243,
   name: "practice2",
   break: 10,
   exercises: [...exercises],
@@ -18,7 +18,7 @@ export const practice2: Practice = {
 };
 
 export const practice3: Practice = {
-  id: 2,
+  id: 424244,
   name: "practice3",
   break: 20,
   exercises: [...exercises],

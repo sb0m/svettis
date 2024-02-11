@@ -4,7 +4,8 @@ export interface Exercise {
   duration: number;
   repetition: number;
   break: number;
-  image: string;
+  image: File | null;
+  imageAsset: string | null;
   description: string;
   undeletable: boolean;
 }

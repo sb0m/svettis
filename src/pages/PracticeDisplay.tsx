@@ -9,10 +9,29 @@ import { Practice } from "../types/types";
 const Container = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
 `;
 
 const ButtonContainer = styled.div`
   display: flex;
+  justify-content: center;
+`;
+
+const Row = styled.div`
+  display: flex;
+  margin: 0.5em;
+
+  @media only screen and (max-width: 700px) {
+    flex-direction: column;
+  }
+`;
+
+const Label = styled.span`
+  color: #aa8a30;
+`;
+
+const Content = styled.div`
+  height: 100%;
 `;
 
 export const PracticeDisplay = () => {
@@ -26,17 +45,31 @@ export const PracticeDisplay = () => {
     (el: Practice) => el.id === practiceId
   );
 
+  if (!practice) return;
+
   return (
     <Container>
-      <h1>DISPLAY {practice?.name}</h1>
-      {practice &&
-        practice.exercises.map((exercise) => (
-          <div key={exercise.id}>
-            <span>{exercise.name}</span>
-            <span>{exercise.duration}</span>
-            <span>{exercise.repetition}</span>
-          </div>
+      <h1>{practice?.name.toUpperCase()}</h1>
+
+      <Content key={practice.id}>
+        <Row>
+          <Label>Name</Label>
+          <span>{practice.name}</span>
+        </Row>
+        <Row>
+          <Label>Break</Label>
+          <span>{practice.break}</span>
+        </Row>
+        <Label>Exercises</Label>
+        {practice.exercises.map((exercise) => (
+          <Row>
+            <span>
+              {exercise.name} - {exercise.repetition} times
+            </span>
+          </Row>
         ))}
+      </Content>
+
       <ButtonContainer>
         <IconButton
           link="/svettis/practices"

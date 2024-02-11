@@ -5,6 +5,10 @@ import practicesReducer from "./slice_practices";
 
 const store = configureStore({
   reducer: { practices: practicesReducer, exercises: exercicesReducer },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }),
 });
 
 export default store;
