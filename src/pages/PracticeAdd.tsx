@@ -24,9 +24,9 @@ const Container = styled.div`
     height: 3em;
     width: 50%;
     border-radius: 4px;
-    background-color: #5b6c5d;
+    background-color: var(--button-color);
     box-shadow: 1px 2px 6px #202621;
-    color: #e7bb41;
+    color: var(--text-color);
     border: none;
     outline: none;
     padding: 0 0.5em;
@@ -34,7 +34,7 @@ const Container = styled.div`
 
   input:active,
   input:focus {
-    border: 1px solid #e7bb41;
+    border: 1px solid var(--text-color);
     outline: 1px;
     box-shadow: none;
     box-shadow: 1px 2px 6px #202621;
@@ -144,7 +144,7 @@ const FormLabelSelectComponent = styled.span`
   flex: 3;
 
   select:focus {
-    border-color: #e7bb41;
+    border-color: var(--text-color);
     outline: 1px;
     box-shadow: none;
   }
@@ -153,8 +153,8 @@ const FormLabelSelectComponent = styled.span`
 const FormLabelHtmlSelect = styled.select`
   height: 3em;
   width: -webkit-fill-available;
-  color: #e7bb41;
-  background-color: #5b6c5d;
+  color: var(--text-color);
+  background-color: var(--button-color);
   border-top-left-radius: 4px;
   border-bottom-left-radius: 4px;
   box-shadow: 1px 2px 6px #202621;

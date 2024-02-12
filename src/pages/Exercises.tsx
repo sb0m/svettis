@@ -31,7 +31,7 @@ const StyledListItem = styled.ul`
   display: flex;
   justify-content: space-between;
   font-weight: 800;
-  color: #5b6c5d;
+  color: var(--button-color);
 `;
 
 const StyledList = styled.li`
@@ -40,7 +40,7 @@ const StyledList = styled.li`
   flex: 18;
 
   ul {
-    background-color: #ef6f6c;
+    background-color: var(--highlight-color);
     margin-bottom: 1em;
     padding: 1em 1em;
     box-shadow: 1px 3px 12px #3f1b1a;

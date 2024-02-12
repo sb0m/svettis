@@ -4,11 +4,11 @@ import { styled } from "styled-components";
 
 const StyledLink = styled(Link)`
   border-radius: 6px;
-  background-color: #5b6c5d;
+  background-color: var(--button-color);
   width: fit-content;
   display: inline-flex;
   box-shadow: 1px 2px 6px #202621;
-  color: #e7bb41;
+  color: var(--text-color);
   margin: 0.5em;
   height: 48px;
   width: 48px;
@@ -22,7 +22,7 @@ const StyledLink = styled(Link)`
   }
 
   &:hover {
-    background-color: #738776;
+    background-color: var(--button-hover-color);
   }
 
   &:active {
@@ -33,11 +33,11 @@ const StyledLink = styled(Link)`
 
 const StyledButton = styled.button<{ disabled: boolean | undefined }>`
   border-radius: 6px;
-  background-color: #5b6c5d;
+  background-color: var(--button-color);
   width: fit-content;
   display: inline-flex;
   box-shadow: 1px 2px 6px #202621;
-  color: #e7bb41;
+  color: var(--text-color);
   margin: 0.5em;
   height: 48px;
   width: 48px;
@@ -57,7 +57,7 @@ const StyledButton = styled.button<{ disabled: boolean | undefined }>`
   }
 
   &:hover {
-    background-color: #738776;
+    background-color: var(--button-hover-color);
   }
 
   &:active {

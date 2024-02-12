@@ -3,6 +3,13 @@ body {
   width: 100vw;
   height: 100vh;
   padding: 0;
+
+  --bg-color: #2a4e3d;
+  --text-color: #ffca7a;
+  --highlight-color: #f56038;
+  --button-color: #0a2f35;
+  --button-hover-color: #184850;
+  --extra-color: #f7a325;
 }
 
 /* 0D606D

@@ -17,14 +17,17 @@ const PlayerContainer = styled.div`
 const ProgressWrapper = styled.div`
   width: 100%;
   height: 2em;
-  background-color: #5b6c5d;
+  background-color: var(--button-color);
   margin-bottom: 2em;
+  border-radius: 4px;
 `;
 
 const ProgressBar = styled.div<{ width: string }>`
   width: ${(props) => props.width};
   height: 2em;
-  background-color: #ef6f6c;
+  background-color: var(--highlight-color);
+  border-bottom-left-radius: 4px;
+  border-top-left-radius: 4px;
 `;
 
 export const ButtonRow = styled.div`
@@ -139,7 +142,6 @@ export const Player = (props: PlayerProps) => {
 
   const Progress = (props: ProgressProps) => (
     <StyledProgress>
-      {isPause && <p>BREAK</p>}
       <ProgressWrapper>
         <ProgressBar
           width={parseInt((props.time / props.duration) * 100 + "") + "%"}
@@ -151,7 +153,11 @@ export const Player = (props: PlayerProps) => {
 
   return currentExercise ? (
     <PlayerContainer>
-      <span>Exercise - {currentExercise.name}</span>
+      {isPause ? (
+        <span>BREAK</span>
+      ) : (
+        <span>Exercise - {currentExercise.name}</span>
+      )}
       {isPause ? (
         <Progress time={currentPauseTime} duration={currentBreakDuration} />
       ) : (

@@ -16,9 +16,9 @@ const Root = styled.div`
   height: 100%;
   display: flex;
   justify-content: center;
-  background-color: #465775;
+  background-color: var(--bg-color);
   font-family: Poor Story, sans-serif;
-  color: #e7bb41;
+  color: var(--text-color);
   text-align: center;
   font-size: 20px;
 
@@ -38,7 +38,7 @@ const Root = styled.div`
 const StyledLink = styled(Link)`
   font-size: 4em;
   font-weight: 800;
-  color: #efcb5d;
+  color: var(--text-color);
 `;
 
 initDB(DBConfig);

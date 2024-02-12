@@ -21,9 +21,9 @@ const Container = styled.div`
     height: 3em;
     width: 50%;
     border-radius: 4px;
-    background-color: #5b6c5d;
+    background-color: var(--button-color);
     box-shadow: 1px 2px 6px #202621;
-    color: #e7bb41;
+    color: var(--text-color);
     border: none;
     outline: none;
     padding: 0 0.5em;
@@ -31,7 +31,7 @@ const Container = styled.div`
 
   input:active,
   input:focus {
-    border: 1px solid #e7bb41;
+    border: 1px solid var(--text-color);
     outline: 1px;
     box-shadow: none;
     box-shadow: 1px 2px 6px #202621;
@@ -99,11 +99,11 @@ const InputRow = styled.div`
 
 const InputLabel = styled.label`
   border-radius: 6px;
-  background-color: #5b6c5d;
+  background-color: var(--button-color);
   width: fit-content;
   display: inline-flex;
   box-shadow: 1px 2px 6px #202621;
-  color: #e7bb41;
+  color: var(--text-color);
   height: 48px;
   width: 48px;
   justify-content: center;
