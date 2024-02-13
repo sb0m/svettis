@@ -20,27 +20,37 @@ const Container = styled.div`
   width: 100%;
 `;
 
-const ButtonContainer = styled.span``;
+const ButtonContainer = styled.span`
+  flex: 3;
+  min-width: 210px;
+  display: flex;
+  justify-content: flex-end;
+`;
 
 const StyledName = styled.span`
   font-size: 2em;
-  display: flex;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   align-items: center;
+  flex: 6;
+  text-align: left;
+  align-self: center;
 `;
 
-const StyledListItem = styled.ul`
+const StyledListItem = styled.li`
   display: flex;
   justify-content: space-between;
   font-weight: 800;
   color: var(--button-color);
 `;
 
-const StyledList = styled.li`
+const StyledList = styled.ul`
   width: 100%;
   overflow: scroll;
   flex: 18;
 
-  ul {
+  li {
     background-color: var(--highlight-color);
     margin-bottom: 1em;
     padding: 1em 1em;
@@ -61,15 +71,6 @@ type ListProps = {
 };
 
 export const Practices = () => {
-  // A hook to access the redux dispatch function.
-  // This is the only way to trigger a state change.
-  // const dispatch = useDispatch();
-
-  // A hook to access the redux store's state.
-  // This hook takes a selector function as an argument.
-  // The selector is called with the store state.
-  // state.todos.todos - todos is the name of the reducer and the name of the variable in the initialState.
-
   const practices = useSelector(
     (state: IRootState) => state.practices.practices
   );
@@ -78,9 +79,7 @@ export const Practices = () => {
 
   const openDialog = (practiceName: string, practiceId: number) => {
     const text =
-      "Do you really want to delete practice with name " +
-      { practiceName } +
-      "?";
+      'Do you really want to delete practice "' + practiceName + '"?';
     if (confirm(text) == true) {
       handleDelete(practiceId);
     }

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Toaster } from "react-hot-toast";
 import { initDB, useIndexedDB } from "react-indexed-db-hook";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, Outlet, useLocation } from "react-router-dom";
@@ -36,10 +37,38 @@ const Root = styled.div`
 `;
 
 const StyledLink = styled(Link)`
+  border-radius: 6px;
+  background-color: var(--button-color);
   font-size: 4em;
   font-weight: 800;
   color: var(--text-color);
+  box-shadow: 1px 2px 6px #202621;
+  margin: 0.5em;
+  justify-content: center;
+  align-items: center;
+  transition: 0.2s ease-in-out;
+  padding: 0.5em;
+
+  :visited {
+    color: var(--text-color);
+  }
+
+  &:hover {
+    background-color: var(--button-hover-color);
+  }
+
+  &:active {
+    box-shadow: 1px 2px 6px transparent;
+    translate: 1px 2px;
+  }
 `;
+
+const Navigation = styled.nav`
+  display: flex;
+  flex-direction: column;
+`;
+
+Toaster;
 
 initDB(DBConfig);
 
@@ -92,12 +121,27 @@ export default function App() {
 
   return (
     <Root>
+      <div>
+        <Toaster
+          toastOptions={{
+            success: {
+              style: {
+                background: "green",
+              },
+            },
+            error: {
+              style: {
+                background: "var(--extra-color)",
+              },
+            },
+          }}
+        />
+      </div>
       {pathname.endsWith("/") && (
-        <nav>
+        <Navigation>
           <StyledLink to="/svettis/exercises">Exercises</StyledLink>
-          <br />
           <StyledLink to="/svettis/practices">Practices</StyledLink>
-        </nav>
+        </Navigation>
       )}
       <Outlet />
     </Root>

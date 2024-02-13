@@ -19,27 +19,37 @@ const Container = styled.div`
   width: 100%;
 `;
 
-const ButtonContainer = styled.span``;
+const ButtonContainer = styled.span`
+  flex: 3;
+  min-width: 140px;
+  display: flex;
+  justify-content: flex-end;
+`;
 
 const StyledName = styled.span`
   font-size: 2em;
-  display: flex;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   align-items: center;
+  flex: 6;
+  text-align: left;
+  align-self: center;
 `;
 
-const StyledListItem = styled.ul`
+const StyledListItem = styled.li`
   display: flex;
   justify-content: space-between;
   font-weight: 800;
   color: var(--button-color);
 `;
 
-const StyledList = styled.li`
+const StyledList = styled.ul`
   width: 100%;
   overflow: scroll;
   flex: 18;
 
-  ul {
+  li {
     background-color: var(--highlight-color);
     margin-bottom: 1em;
     padding: 1em 1em;
@@ -63,9 +73,7 @@ export const Exercises = () => {
 
   const openDialog = (exerciseName: string, exerciseId: number) => {
     const text =
-      "Do you really want to delete practice with name " +
-      { exerciseName } +
-      "?";
+      'Do you really want to delete practice "' + exerciseName + '"?';
     if (confirm(text) == true) {
       handleDelete(exerciseId);
     }

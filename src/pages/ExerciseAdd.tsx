@@ -51,6 +51,7 @@ const FormContainer = styled.div`
   flex: 12;
   gap: 1em;
   text-align: left;
+  overflow-y: scroll;
 `;
 
 const FormRow = styled.div`
@@ -145,7 +146,7 @@ export const ExerciseAdd = () => {
       duration: parseInt(duration),
       repetition: parseInt(repetition),
       description: description,
-      image: img,
+      image: img || null,
       // image
     }).then(
       (event) => {
@@ -158,7 +159,7 @@ export const ExerciseAdd = () => {
             duration: parseInt(duration),
             repetition: parseInt(repetition),
             description: description,
-            image: img,
+            image: img || null,
             undeletable: false,
           })
         );
@@ -240,8 +241,6 @@ export const ExerciseAdd = () => {
               id="img"
               name="img"
               onChange={(event) => {
-                console.log("img ", event.target.files);
-
                 const selectedFile =
                   event.target.files && event.target.files.length > 0
                     ? event.target.files[0]
@@ -265,12 +264,7 @@ export const ExerciseAdd = () => {
         <IconButton link="/svettis/" icon={<BsFillHouseFill />} />
         <IconButton
           disabled={
-            !name ||
-            !breakNumber ||
-            !duration ||
-            !repetition ||
-            !description ||
-            !img
+            !name || !breakNumber || !duration || !repetition || !description
           }
           onTouch={handleAdd}
           icon={<BsFillFloppyFill />}

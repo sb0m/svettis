@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { toast } from "react-hot-toast";
 import {
   BsArrowCounterclockwise,
   BsFillArrowLeftSquareFill,
@@ -54,6 +55,7 @@ const FormContainer = styled.div`
   flex: 12;
   gap: 1em;
   text-align: left;
+  overflow-y: scroll;
 `;
 
 const FormRow = styled.div`
@@ -97,6 +99,7 @@ const AddExerciseButton = styled(IconButton)`
   margin: 0;
   padding: 4px;
   border-radius: 0px;
+
   &:active {
     box-shadow: 0px transparent;
     translate: 0px 0px;
@@ -152,12 +155,27 @@ const FormLabelSelectComponent = styled.span`
 
 const FormLabelHtmlSelect = styled.select`
   height: 3em;
-  width: -webkit-fill-available;
+  width: 160px;
   color: var(--text-color);
   background-color: var(--button-color);
   border-top-left-radius: 4px;
   border-bottom-left-radius: 4px;
   box-shadow: 1px 2px 6px #202621;
+  border: none;
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--button-hover-color);
+  }
+
+  &:active {
+    box-shadow: 1px 2px 6px transparent;
+    translate: 1px 2px;
+  }
+
+  @media only screen and (max-width: 700px) {
+    width: inherit;
+  }
 `;
 
 export const PracticeAdd = () => {
@@ -203,6 +221,9 @@ export const PracticeAdd = () => {
       },
       (error) => {
         console.log(error);
+        toast.error(
+          "Something went wrong. Try to insert a different name, as the name has to be unique."
+        );
       }
     );
   };
@@ -267,6 +288,7 @@ export const PracticeAdd = () => {
                 icon={<BsFillPlusCircleFill />}
               />
               <ResetExercisesButton
+                disabled={!selectedExercises.length}
                 onTouch={handleResetExercises}
                 icon={<BsArrowCounterclockwise />}
               />

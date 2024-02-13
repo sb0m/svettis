@@ -11,23 +11,46 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-
-  img {
-    width: 30%;
-  }
+  width: 100%;
+  padding: 0 10%;
 `;
 
 const Row = styled.div`
   display: flex;
-  margin: 0.5em;
+  margin: 0.7em;
+
+  img {
+    width: 90%;
+  }
+
+  span {
+    margin-bottom: 0.2em;
+  }
 
   @media only screen and (max-width: 700px) {
     flex-direction: column;
   }
 `;
 
+const ImgSpan = styled.span`
+  width: 70%;
+  display: flex;
+
+  @media only screen and (max-width: 700px) {
+    width: 100%;
+    justify-content: center;
+  }
+`;
+
 const Label = styled.span`
-  color: #aa8a30;
+  width: 30%;
+  text-align: left;
+  color: var(--text-color-dark);
+
+  @media only screen and (max-width: 700px) {
+    text-align: center;
+    width: 100%;
+  }
 `;
 
 const ButtonContainer = styled.div`
@@ -37,6 +60,7 @@ const ButtonContainer = styled.div`
 
 const Content = styled.div`
   height: 100%;
+  overflow-y: scroll;
 `;
 
 export const ExerciseDisplay = () => {
@@ -55,10 +79,6 @@ export const ExerciseDisplay = () => {
   );
 
   useEffect(() => {
-    displayImage();
-  }, []);
-
-  const displayImage = () => {
     if (!exercise || (!exercise.image && !exercise.imageAsset)) {
       return;
     }
@@ -72,7 +92,7 @@ export const ExerciseDisplay = () => {
         setImageDataUrl(imageDataUrl);
       };
     }
-  };
+  }, [exercise]);
 
   return (
     <Container>
@@ -101,9 +121,13 @@ export const ExerciseDisplay = () => {
           </Row>
           <Row>
             <Label>Image</Label>
-            <span>
-              <img src={imageDataUrl?.toString()} />
-            </span>
+            <ImgSpan>
+              {imageDataUrl ? (
+                <img src={imageDataUrl?.toString()} />
+              ) : (
+                "No image"
+              )}
+            </ImgSpan>
           </Row>
         </Content>
       )}

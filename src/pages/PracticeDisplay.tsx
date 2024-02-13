@@ -10,6 +10,8 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  width: 100%;
+  padding: 0 10%;
 `;
 
 const ButtonContainer = styled.div`
@@ -19,7 +21,15 @@ const ButtonContainer = styled.div`
 
 const Row = styled.div`
   display: flex;
-  margin: 0.5em;
+  margin: 0.7em;
+
+  span {
+    margin-bottom: 0.2em;
+  }
+
+  ul {
+    margin: 0;
+  }
 
   @media only screen and (max-width: 700px) {
     flex-direction: column;
@@ -27,11 +37,19 @@ const Row = styled.div`
 `;
 
 const Label = styled.span`
-  color: #aa8a30;
+  width: 30%;
+  text-align: left;
+  color: var(--text-color-dark);
+
+  @media only screen and (max-width: 700px) {
+    text-align: center;
+    width: 100%;
+  }
 `;
 
 const Content = styled.div`
   height: 100%;
+  overflow-y: scroll;
 `;
 
 export const PracticeDisplay = () => {
@@ -60,14 +78,16 @@ export const PracticeDisplay = () => {
           <Label>Break</Label>
           <span>{practice.break}</span>
         </Row>
-        <Label>Exercises</Label>
-        {practice.exercises.map((exercise) => (
-          <Row>
-            <span>
-              {exercise.name} - {exercise.repetition} times
-            </span>
-          </Row>
-        ))}
+        <Row>
+          <Label>Exercises</Label>
+          <ul>
+            {practice.exercises.map((exercise) => (
+              <li>
+                {exercise.name} - {exercise.repetition} times
+              </li>
+            ))}
+          </ul>
+        </Row>
       </Content>
 
       <ButtonContainer>
