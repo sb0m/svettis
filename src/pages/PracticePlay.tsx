@@ -11,6 +11,8 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  overflow-y: auto;
+  overflow-x: hidden;
 `;
 
 export const PracticePlay = () => {
@@ -26,9 +28,8 @@ export const PracticePlay = () => {
 
   return (
     <Container>
-      {practice && <h1>PLAY {practice.name}</h1>}
+      <h1>PLAY {practice?.name}</h1>
       {practice && <Player practice={practice} />}
-
       <ButtonRow>
         <IconButton
           link="/svettis/practices"

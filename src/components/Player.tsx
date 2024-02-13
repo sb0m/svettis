@@ -8,6 +8,8 @@ const PlayerContainer = styled.div`
   display: flex;
   flex-direction: column;
   height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
 
   span {
     margin-bottom: 2em;
@@ -168,12 +170,8 @@ export const Player = (props: PlayerProps) => {
       </span>
       <ButtonRow>
         <IconButton
-          onTouch={() => setIsPlaying(false)}
-          icon={<BsFillPauseCircleFill />}
-        />
-        <IconButton
-          onTouch={() => setIsPlaying(true)}
-          icon={<BsFillPlayBtnFill />}
+          onTouch={() => setIsPlaying((prev) => !prev)}
+          icon={isPlaying ? <BsFillPauseCircleFill /> : <BsFillPlayBtnFill />}
         />
       </ButtonRow>
     </PlayerContainer>

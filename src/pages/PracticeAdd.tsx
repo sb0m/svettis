@@ -55,7 +55,8 @@ const FormContainer = styled.div`
   flex: 12;
   gap: 1em;
   text-align: left;
-  overflow-y: scroll;
+  overflow-y: auto;
+  overflow-x: hidden;
 `;
 
 const FormRow = styled.div`

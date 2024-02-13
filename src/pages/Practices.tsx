@@ -47,7 +47,8 @@ const StyledListItem = styled.li`
 
 const StyledList = styled.ul`
   width: 100%;
-  overflow: scroll;
+  overflow-y: auto;
+  overflow-x: hidden;
   flex: 18;
 
   li {
