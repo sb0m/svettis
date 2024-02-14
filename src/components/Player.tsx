@@ -1,5 +1,9 @@
 import { useEffect, useState } from "react";
-import { BsFillPauseCircleFill, BsFillPlayBtnFill } from "react-icons/bs";
+import {
+  BsFastForwardBtnFill,
+  BsFillPauseCircleFill,
+  BsFillPlayBtnFill,
+} from "react-icons/bs";
 import { styled } from "styled-components";
 import { IconButton } from "../components/IconButton";
 import { Practice } from "../types/types";
@@ -10,18 +14,16 @@ const PlayerContainer = styled.div`
   height: 100%;
   overflow-y: auto;
   overflow-x: hidden;
-
-  span {
-    margin-bottom: 2em;
-  }
 `;
 
 const ProgressWrapper = styled.div`
   width: 100%;
   height: 2em;
   background-color: var(--button-color);
-  margin-bottom: 2em;
+  margin-bottom: 3em;
   border-radius: 4px;
+  margin: 0.5em 0;
+  display: block;
 `;
 
 const ProgressBar = styled.div<{ width: string }>`
@@ -35,11 +37,64 @@ const ProgressBar = styled.div<{ width: string }>`
 export const ButtonRow = styled.div`
   display: flex;
   align-self: center;
+  margin-bottom: 1em;
 `;
 
 export const StyledProgress = styled.div`
   display: flex;
   flex-direction: column;
+`;
+
+export const CurrentExerciseSpan = styled.span<{ current: boolean }>`
+  color: ${(props) =>
+    props.current ? "var(--highlight-color)" : "var(--text-color-dark)"};
+  font-weight: bold;
+  font-size: ${(props) => (props.current ? "1.4em" : "1em")};
+
+  span {
+    display: block;
+  }
+`;
+
+export const ExerciseName = styled.span`
+  color: var(--text-color);
+`;
+
+export const Repetition = styled.span`
+  color: var(--highlight-color);
+`;
+
+export const CurrentTime = styled.span`
+  color: var(--highlight-color);
+  font-weight: bold;
+  font-size: 1.7em;
+  display: block;
+`;
+
+export const IconButtonBack = styled(IconButton)`
+  svg {
+    transform: rotate(180deg);
+  }
+`;
+
+export const Exercises = styled.div`
+  color: var(--text-color-dark);
+  display: flex;
+  flex-direction: column;
+  margin: 1em 0;
+
+  h3 {
+    color: var(--text-color);
+    margin: 0.2em;
+  }
+`;
+
+export const ImgContainer = styled.div`
+  margin: 1em 0;
+
+  img {
+    width: 90%;
+  }
 `;
 
 type PlayerProps = {
@@ -57,6 +112,27 @@ export const Player = (props: PlayerProps) => {
   const [isPause, setIsPause] = useState(false);
   const [currentPauseTime, setCurrentPauseTime] = useState(0);
   const [currentBreakDuration, setCurrentBreakDuration] = useState(0);
+  const [imageDataUrl, setImageDataUrl] = useState<string | ArrayBuffer | null>(
+    null
+  );
+
+  useEffect(() => {
+    const exercise = props.practice.exercises[currentExerciseIndex];
+
+    if (!exercise || (!exercise.image && !exercise.imageAsset)) {
+      return;
+    }
+    if (exercise.imageAsset) {
+      setImageDataUrl("/svettis/pictures/" + exercise.imageAsset);
+    } else if (exercise.image) {
+      const reader = new FileReader();
+      reader.readAsDataURL(exercise.image);
+      reader.onload = () => {
+        const imageDataUrl = reader.result;
+        setImageDataUrl(imageDataUrl);
+      };
+    }
+  }, [currentExerciseIndex, props.practice.exercises]);
 
   useEffect(() => {
     //count break
@@ -148,32 +224,93 @@ export const Player = (props: PlayerProps) => {
         <ProgressBar
           width={parseInt((props.time / props.duration) * 100 + "") + "%"}
         ></ProgressBar>
-        <span>{`${props.time} sec / ${props.duration} sec`}</span>
       </ProgressWrapper>
+      <CurrentTime>{`${props.time} sec`}</CurrentTime>
     </StyledProgress>
   );
 
+  const changeExercise = (ind: number): void => {
+    setCurrentExerciseIndex(ind);
+    setCurrentExercise(props.practice.exercises[ind]);
+    setCurrentTime(0);
+    setCurrentRepetition(1);
+    setIsPause(false);
+    setCurrentPauseTime(0);
+    setCurrentBreakDuration(props.practice.break);
+  };
+
   return currentExercise ? (
     <PlayerContainer>
+      <ButtonRow>
+        <IconButtonBack
+          onTouch={() => changeExercise(currentExerciseIndex - 1)}
+          icon={<BsFastForwardBtnFill />}
+          disabled={isPause || currentExerciseIndex === 0}
+        />
+        <IconButton
+          onTouch={() => setIsPlaying((prev) => !prev)}
+          icon={isPlaying ? <BsFillPauseCircleFill /> : <BsFillPlayBtnFill />}
+          disabled={isPause}
+        />
+        <IconButton
+          onTouch={() => changeExercise(currentExerciseIndex + 1)}
+          icon={<BsFastForwardBtnFill />}
+          disabled={
+            isPause ||
+            currentExerciseIndex === props.practice.exercises.length - 1
+          }
+        />
+      </ButtonRow>
+
       {isPause ? (
-        <span>BREAK</span>
+        <ExerciseName>BREAK</ExerciseName>
       ) : (
-        <span>Exercise - {currentExercise.name}</span>
+        <ExerciseName>
+          <span> {currentExercise.name}</span>
+          <span>{` ${currentExercise.duration} sec | `}</span>
+          <span>{`breaks ${currentExercise.break} sec`}</span>
+        </ExerciseName>
       )}
       {isPause ? (
         <Progress time={currentPauseTime} duration={currentBreakDuration} />
       ) : (
         <Progress time={currentTime} duration={currentExercise.duration} />
       )}
-      <span>
-        Repetition - {currentRepetition} / {currentExercise.repetition}
-      </span>
-      <ButtonRow>
-        <IconButton
-          onTouch={() => setIsPlaying((prev) => !prev)}
-          icon={isPlaying ? <BsFillPauseCircleFill /> : <BsFillPlayBtnFill />}
-        />
-      </ButtonRow>
+
+      <Repetition>
+        Repetition {currentRepetition} | {currentExercise.repetition}
+      </Repetition>
+
+      <ImgContainer>
+        {imageDataUrl && <img src={imageDataUrl?.toString()} />}
+      </ImgContainer>
+
+      <Exercises>
+        <h3>Training Program</h3>
+        {props.practice?.exercises.map((exercise, index) => {
+          return (
+            <>
+              <CurrentExerciseSpan
+                current={
+                  index === currentExerciseIndex &&
+                  !(currentRepetition === currentExercise.repetition && isPause)
+                }
+              >
+                {exercise.name}
+              </CurrentExerciseSpan>
+              <CurrentExerciseSpan
+                current={
+                  index === currentExerciseIndex &&
+                  currentRepetition === currentExercise.repetition &&
+                  isPause
+                }
+              >
+                - break {props.practice.break} sec -
+              </CurrentExerciseSpan>
+            </>
+          );
+        })}
+      </Exercises>
     </PlayerContainer>
   ) : (
     <>No exercise</>

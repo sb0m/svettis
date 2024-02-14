@@ -5,7 +5,7 @@ export const practice1: Practice = {
   id: 424242,
   name: "practice1",
   break: 10,
-  exercises: [exercises[1], exercises[2]],
+  exercises: [exercises[1], exercises[2], ...exercises],
   undeletable: true,
 };
 
@@ -13,7 +13,7 @@ export const practice2: Practice = {
   id: 424243,
   name: "practice2",
   break: 10,
-  exercises: [...exercises],
+  exercises: [...exercises, ...exercises],
   undeletable: true,
 };
 

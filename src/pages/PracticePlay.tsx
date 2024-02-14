@@ -10,9 +10,10 @@ import { Practice } from "../types/types";
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   overflow-y: auto;
   overflow-x: hidden;
+  width: 100%;
+  padding: 0 2em;
 `;
 
 export const PracticePlay = () => {
@@ -28,7 +29,7 @@ export const PracticePlay = () => {
 
   return (
     <Container>
-      <h1>PLAY {practice?.name}</h1>
+      <h1>{practice?.name.toUpperCase()}</h1>
       {practice && <Player practice={practice} />}
       <ButtonRow>
         <IconButton
