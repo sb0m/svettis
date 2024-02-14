@@ -57,6 +57,11 @@ export const CurrentExerciseSpan = styled.span<{ current: boolean }>`
 `;
 
 export const ExerciseName = styled.span`
+  color: var(--highlight-color);
+  font-size: 1.7em;
+`;
+
+export const ExerciseNameRow = styled.span`
   color: var(--text-color);
 `;
 
@@ -118,6 +123,7 @@ export const Player = (props: PlayerProps) => {
 
   useEffect(() => {
     const exercise = props.practice.exercises[currentExerciseIndex];
+    setImageDataUrl(null);
 
     if (!exercise || (!exercise.image && !exercise.imageAsset)) {
       return;
@@ -156,6 +162,7 @@ export const Player = (props: PlayerProps) => {
       setCurrentTime(0);
       setCurrentRepetition(1);
       setIsPause(false);
+      setImageDataUrl(null);
     };
 
     const addRepetition = () => {
@@ -181,6 +188,7 @@ export const Player = (props: PlayerProps) => {
             setCurrentTime(0);
             setCurrentExerciseIndex(0);
             setCurrentRepetition(1);
+            setImageDataUrl(null);
             return;
           }
           // new Exercise
@@ -188,6 +196,7 @@ export const Player = (props: PlayerProps) => {
           setCurrentBreakDuration(props.practice.break);
           navigator.vibrate(200);
           setTimeout(switchExercise, props.practice.break * 1000);
+          setImageDataUrl(null);
           return;
         }
       }
@@ -263,13 +272,15 @@ export const Player = (props: PlayerProps) => {
       </ButtonRow>
 
       {isPause ? (
-        <ExerciseName>BREAK</ExerciseName>
+        <ExerciseNameRow>
+          <ExerciseName>BREAK</ExerciseName>
+        </ExerciseNameRow>
       ) : (
-        <ExerciseName>
-          <span> {currentExercise.name}</span>
-          <span>{` ${currentExercise.duration} sec | `}</span>
+        <ExerciseNameRow>
+          <ExerciseName>{currentExercise.name}</ExerciseName>
+          <span>{` | ${currentExercise.duration} sec | `}</span>
           <span>{`breaks ${currentExercise.break} sec`}</span>
-        </ExerciseName>
+        </ExerciseNameRow>
       )}
       {isPause ? (
         <Progress time={currentPauseTime} duration={currentBreakDuration} />

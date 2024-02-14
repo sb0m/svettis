@@ -1,19 +1,41 @@
 import { Practice } from "../types/types";
 import { exercises } from "./exercises";
 
-export const practice1: Practice = {
-  id: 424242,
-  name: "practice1",
-  break: 10,
-  exercises: [exercises[1], exercises[2], ...exercises],
+export const StefanPractice: Practice = {
+  id: 424238,
+  name: "Stefan Practice",
+  break: 30,
+  exercises: [
+    exercises[0],
+    exercises[1],
+    exercises[2],
+    exercises[3],
+    exercises[4],
+    exercises[5],
+    exercises[6],
+    exercises[7],
+  ],
   undeletable: true,
 };
 
-export const practice2: Practice = {
-  id: 424243,
-  name: "practice2",
-  break: 10,
-  exercises: [...exercises, ...exercises],
+export const ErikPractice: Practice = {
+  id: 424239,
+  name: "Erik Practice",
+  break: 30,
+  exercises: [
+    exercises[0],
+    exercises[8],
+    exercises[9],
+    exercises[10],
+    exercises[11],
+    exercises[12],
+    exercises[13],
+    exercises[14],
+    exercises[3],
+    exercises[5],
+    exercises[6],
+    exercises[7],
+  ],
   undeletable: true,
 };
 
@@ -25,4 +47,4 @@ export const practice3: Practice = {
   undeletable: true,
 };
 
-export const practices = [practice1, practice2, practice3];
+export const practices = [StefanPractice, ErikPractice];
