@@ -13,7 +13,6 @@ const Container = styled.div`
   overflow-y: auto;
   overflow-x: hidden;
   width: 100%;
-  padding: 0 2em;
 `;
 
 export const PracticePlay = () => {

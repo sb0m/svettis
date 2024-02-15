@@ -14,6 +14,13 @@ const PlayerContainer = styled.div`
   height: 100%;
   overflow-y: auto;
   overflow-x: hidden;
+  padding: 0 2em;
+`;
+
+const PlayContent = styled.div`
+  border: 1px solid var(--extra-color);
+  border-radius: 8px;
+  padding: 0.5em;
 `;
 
 const ProgressWrapper = styled.div`
@@ -38,6 +45,7 @@ export const ButtonRow = styled.div`
   display: flex;
   align-self: center;
   margin-bottom: 1em;
+  justify-content: center;
 `;
 
 export const StyledProgress = styled.div`
@@ -45,20 +53,29 @@ export const StyledProgress = styled.div`
   flex-direction: column;
 `;
 
-export const CurrentExerciseSpan = styled.span<{ current: boolean }>`
+export const CurrentExerciseSpan = styled.span<{ isCurrent: boolean }>`
   color: ${(props) =>
-    props.current ? "var(--highlight-color)" : "var(--text-color-dark)"};
+    props.isCurrent ? "var(--highlight-color)" : "var(--text-color)"};
   font-weight: bold;
-  font-size: ${(props) => (props.current ? "1.4em" : "1em")};
+  font-size: ${(props) => (props.isCurrent ? "1.4em" : "1em")};
+`;
 
-  span {
-    display: block;
-  }
+export const CurrentBreakSpan = styled.span<{ isCurrent: boolean }>`
+  color: ${(props) =>
+    props.isCurrent ? "var(--highlight-color)" : "var(--text-color-dark)"};
+  font-weight: bold;
+  font-size: ${(props) => (props.isCurrent ? "1.4em" : "1em")};
+`;
+
+export const ExerciseSpan = styled.div`
+  display: flex;
+  flex-direction: column;
 `;
 
 export const ExerciseName = styled.span`
   color: var(--highlight-color);
   font-size: 1.7em;
+  display: block;
 `;
 
 export const ExerciseNameRow = styled.span`
@@ -87,6 +104,11 @@ export const Exercises = styled.div`
   display: flex;
   flex-direction: column;
   margin: 1em 0;
+  border: 1px solid var(--extra-color);
+  border-radius: 6px;
+
+  overflow-y: auto;
+  overflow-x: hidden;
 
   h3 {
     color: var(--text-color);
@@ -98,7 +120,9 @@ export const ImgContainer = styled.div`
   margin: 1em 0;
 
   img {
-    width: 90%;
+    max-width: 95%;
+    max-height: 30vh;
+    aspect-ratio: auto;
   }
 `;
 
@@ -107,20 +131,21 @@ type PlayerProps = {
 };
 
 export const Player = (props: PlayerProps) => {
-  const vibrationPattern = [1500, 500, 1500, 500, 1500];
   const [currentExercise, setCurrentExercise] = useState(
     props.practice.exercises[0]
   );
   const [currentTime, setCurrentTime] = useState(0);
   const [currentExerciseIndex, setCurrentExerciseIndex] = useState(0);
   const [currentRepetition, setCurrentRepetition] = useState(1);
-  const [isPlaying, setIsPlaying] = useState(true);
+  const [isPlaying, setIsPlaying] = useState(false);
   const [isPause, setIsPause] = useState(false);
   const [currentPauseTime, setCurrentPauseTime] = useState(0);
   const [currentBreakDuration, setCurrentBreakDuration] = useState(0);
   const [imageDataUrl, setImageDataUrl] = useState<string | ArrayBuffer | null>(
     null
   );
+
+  const audioUrl = "../../sounds/alarm.mp3";
 
   useEffect(() => {
     const exercise = props.practice.exercises[currentExerciseIndex];
@@ -156,6 +181,9 @@ export const Player = (props: PlayerProps) => {
   }, [isPause]);
 
   useEffect(() => {
+    const vibrationPattern = [1500, 500, 1500, 500, 1500];
+    const audio = new Audio(audioUrl);
+
     const switchExercise = () => {
       const newExerciseIndex = currentExerciseIndex + 1;
       setCurrentExerciseIndex(newExerciseIndex);
@@ -163,7 +191,6 @@ export const Player = (props: PlayerProps) => {
       setCurrentTime(0);
       setCurrentRepetition(1);
       setIsPause(false);
-      setImageDataUrl(null);
     };
 
     const addRepetition = () => {
@@ -179,6 +206,7 @@ export const Player = (props: PlayerProps) => {
           setIsPause(true);
           setCurrentBreakDuration(currentExercise.break);
           navigator.vibrate(vibrationPattern);
+          audio.play();
           setTimeout(addRepetition, currentExercise.break * 1000);
           return;
         } else {
@@ -189,15 +217,14 @@ export const Player = (props: PlayerProps) => {
             setCurrentTime(0);
             setCurrentExerciseIndex(0);
             setCurrentRepetition(1);
-            setImageDataUrl(null);
             return;
           }
           // new Exercise
           setIsPause(true);
           setCurrentBreakDuration(props.practice.break);
           navigator.vibrate(vibrationPattern);
+          audio.play();
           setTimeout(switchExercise, props.practice.break * 1000);
-          setImageDataUrl(null);
           return;
         }
       }
@@ -236,13 +263,6 @@ export const Player = (props: PlayerProps) => {
         ></ProgressBar>
       </ProgressWrapper>
       <CurrentTime>{`${props.time} sec`}</CurrentTime>
-      <audio id="my-audio">
-        <source src="./sounds/alarm.mp3" type="audio/mpeg" />
-        <p>
-          Download<a href="audiofile.mp3">audiofile.mp3</a>
-        </p>
-      </audio>
-      <button id="play">play</button>
     </StyledProgress>
   );
 
@@ -258,75 +278,77 @@ export const Player = (props: PlayerProps) => {
 
   return currentExercise ? (
     <PlayerContainer>
-      <ButtonRow>
-        <IconButtonBack
-          onTouch={() => changeExercise(currentExerciseIndex - 1)}
-          icon={<BsFastForwardBtnFill />}
-          disabled={isPause || currentExerciseIndex === 0}
-        />
-        <IconButton
-          onTouch={() => setIsPlaying((prev) => !prev)}
-          icon={isPlaying ? <BsFillPauseCircleFill /> : <BsFillPlayBtnFill />}
-          disabled={isPause}
-        />
-        <IconButton
-          onTouch={() => changeExercise(currentExerciseIndex + 1)}
-          icon={<BsFastForwardBtnFill />}
-          disabled={
-            isPause ||
-            currentExerciseIndex === props.practice.exercises.length - 1
-          }
-        />
-      </ButtonRow>
+      <PlayContent>
+        <ButtonRow>
+          <IconButtonBack
+            onTouch={() => changeExercise(currentExerciseIndex - 1)}
+            icon={<BsFastForwardBtnFill />}
+            disabled={isPause || currentExerciseIndex === 0}
+          />
+          <IconButton
+            onTouch={() => setIsPlaying((prev) => !prev)}
+            icon={isPlaying ? <BsFillPauseCircleFill /> : <BsFillPlayBtnFill />}
+            disabled={isPause}
+          />
+          <IconButton
+            onTouch={() => changeExercise(currentExerciseIndex + 1)}
+            icon={<BsFastForwardBtnFill />}
+            disabled={
+              isPause ||
+              currentExerciseIndex === props.practice.exercises.length - 1
+            }
+          />
+        </ButtonRow>
 
-      {isPause ? (
-        <ExerciseNameRow>
-          <ExerciseName>BREAK</ExerciseName>
-        </ExerciseNameRow>
-      ) : (
-        <ExerciseNameRow>
-          <ExerciseName>{currentExercise.name}</ExerciseName>
-          <span>{` | ${currentExercise.duration} sec | `}</span>
-          <span>{`breaks ${currentExercise.break} sec`}</span>
-        </ExerciseNameRow>
-      )}
-      {isPause ? (
-        <Progress time={currentPauseTime} duration={currentBreakDuration} />
-      ) : (
-        <Progress time={currentTime} duration={currentExercise.duration} />
-      )}
+        {isPause ? (
+          <ExerciseNameRow>
+            <ExerciseName>BREAK</ExerciseName>
+            <span>{`| ${currentBreakDuration} sec |`}</span>
+          </ExerciseNameRow>
+        ) : (
+          <ExerciseNameRow>
+            <ExerciseName>{currentExercise.name}</ExerciseName>
+            <span>{`| ${currentExercise.duration} sec - `}</span>
+            <span>{`breaks ${currentExercise.break} sec |`}</span>
+          </ExerciseNameRow>
+        )}
+        {isPause ? (
+          <Progress time={currentPauseTime} duration={currentBreakDuration} />
+        ) : (
+          <Progress time={currentTime} duration={currentExercise.duration} />
+        )}
 
-      <Repetition>
-        Repetition {currentRepetition} | {currentExercise.repetition}
-      </Repetition>
+        <Repetition>
+          Repetition {currentRepetition} | {currentExercise.repetition}
+        </Repetition>
+      </PlayContent>
 
       <ImgContainer>
         {imageDataUrl && <img src={imageDataUrl?.toString()} />}
       </ImgContainer>
 
       <Exercises>
-        <h3>Training Program</h3>
         {props.practice?.exercises.map((exercise, index) => {
           return (
-            <>
+            <ExerciseSpan key={index}>
               <CurrentExerciseSpan
-                current={
+                isCurrent={
                   index === currentExerciseIndex &&
                   !(currentRepetition === currentExercise.repetition && isPause)
                 }
               >
                 {exercise.name}
               </CurrentExerciseSpan>
-              <CurrentExerciseSpan
-                current={
+              <CurrentBreakSpan
+                isCurrent={
                   index === currentExerciseIndex &&
                   currentRepetition === currentExercise.repetition &&
                   isPause
                 }
               >
-                - break {props.practice.break} sec -
-              </CurrentExerciseSpan>
-            </>
+                | BREAK {props.practice.break} sec |
+              </CurrentBreakSpan>
+            </ExerciseSpan>
           );
         })}
       </Exercises>

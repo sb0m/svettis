@@ -1,5 +1,6 @@
 import { Exercise } from "../types/types";
 
+// 0
 const ObliqueTwistSquat: Exercise = {
   id: 424242,
   name: "Oblique Twist Squat",
@@ -12,6 +13,7 @@ const ObliqueTwistSquat: Exercise = {
   undeletable: true,
 };
 
+// 1
 const MountainClimbers: Exercise = {
   id: 424243,
   name: "Mountain Climbers",
@@ -24,6 +26,7 @@ const MountainClimbers: Exercise = {
   undeletable: true,
 };
 
+// 2
 const BirdDog: Exercise = {
   id: 424244,
   name: "Bird Dog",
@@ -36,6 +39,7 @@ const BirdDog: Exercise = {
   undeletable: true,
 };
 
+// 3
 const ElbowPlankRaise: Exercise = {
   id: 42425,
   name: "Elbow Plank Raise",
@@ -49,9 +53,10 @@ const ElbowPlankRaise: Exercise = {
   undeletable: true,
 };
 
+// 4
 const Swimming: Exercise = {
   id: 42426,
-  name: "Elbow Plank Raise",
+  name: "Swimming",
   duration: 40,
   repetition: 2,
   break: 20,
@@ -62,6 +67,7 @@ const Swimming: Exercise = {
   undeletable: true,
 };
 
+// 5
 const SideToSideOblique: Exercise = {
   id: 42427,
   name: "Side To Side Oblique",
@@ -74,6 +80,7 @@ const SideToSideOblique: Exercise = {
   undeletable: true,
 };
 
+// 6
 const DeadBug: Exercise = {
   id: 42428,
   name: "Dead Bug",
@@ -86,6 +93,7 @@ const DeadBug: Exercise = {
   undeletable: true,
 };
 
+// 7
 const GeneralStretch: Exercise = {
   id: 42429,
   name: "General Stretch",
@@ -98,6 +106,7 @@ const GeneralStretch: Exercise = {
   undeletable: true,
 };
 
+// 8
 const ToeLift: Exercise = {
   id: 42430,
   name: "Toe Lift",
@@ -110,6 +119,7 @@ const ToeLift: Exercise = {
   undeletable: true,
 };
 
+// 9
 const SplitSquat: Exercise = {
   id: 42431,
   name: "Split Squat",
@@ -122,6 +132,7 @@ const SplitSquat: Exercise = {
   undeletable: true,
 };
 
+// 10
 const HipLift: Exercise = {
   id: 42432,
   name: "Hip Lift",
@@ -134,6 +145,7 @@ const HipLift: Exercise = {
   undeletable: true,
 };
 
+// 11
 const TrizepsDips: Exercise = {
   id: 42434,
   name: "Trizeps Dips",
@@ -146,6 +158,7 @@ const TrizepsDips: Exercise = {
   undeletable: true,
 };
 
+// 12
 const PushUps: Exercise = {
   id: 42435,
   name: "Push Ups",
@@ -158,6 +171,7 @@ const PushUps: Exercise = {
   undeletable: true,
 };
 
+// 13
 const BearPlank: Exercise = {
   id: 42436,
   name: "Bear Plank",
@@ -170,6 +184,7 @@ const BearPlank: Exercise = {
   undeletable: true,
 };
 
+// 14
 const HighCrunches: Exercise = {
   id: 42437,
   name: "High Crunches",

@@ -1,12 +1,10 @@
 import { useEffect, useState } from "react";
 import { Toaster } from "react-hot-toast";
-import { Bs0CircleFill } from "react-icons/bs";
 import { initDB, useIndexedDB } from "react-indexed-db-hook";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, Outlet, useLocation } from "react-router-dom";
 import { styled } from "styled-components";
 import { DBConfig } from "./DBConfig";
-import { IconButton } from "./components/IconButton";
 import { exercises as dataExercises } from "./data/exercises";
 import { practices as dataPractices } from "./data/practices";
 import { addExercise } from "./store/slice_exercises.tsx";
@@ -143,11 +141,6 @@ export default function App() {
         <Navigation>
           <StyledLink to="/svettis/exercises">Exercises</StyledLink>
           <StyledLink to="/svettis/practices">Practices</StyledLink>
-
-          <IconButton
-            onTouch={() => navigator.vibrate([1500, 500, 1500, 500, 1500])}
-            icon={<Bs0CircleFill />}
-          />
         </Navigation>
       )}
       <Outlet />

@@ -39,12 +39,4 @@ export const ErikPractice: Practice = {
   undeletable: true,
 };
 
-export const practice3: Practice = {
-  id: 424244,
-  name: "practice3",
-  break: 20,
-  exercises: [...exercises],
-  undeletable: true,
-};
-
 export const practices = [StefanPractice, ErikPractice];
