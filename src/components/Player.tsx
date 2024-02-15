@@ -165,7 +165,7 @@ export const Player = (props: PlayerProps) => {
     null
   );
 
-  // const audioUrl = "../../sounds/alarm.mp3";
+  const audioUrl = "../../sounds/alarm.mp3";
 
   useEffect(() => {
     const exercise = props.practice.exercises[currentExerciseIndex];
@@ -202,7 +202,7 @@ export const Player = (props: PlayerProps) => {
 
   useEffect(() => {
     const vibrationPattern = [1500, 500, 1500];
-    // const audio = new Audio(audioUrl);
+    const audio = new Audio(audioUrl);
 
     const switchExercise = () => {
       const newExerciseIndex = currentExerciseIndex + 1;
@@ -226,7 +226,7 @@ export const Player = (props: PlayerProps) => {
           setIsPause(true);
           setCurrentBreakDuration(currentExercise.break);
           navigator.vibrate(vibrationPattern);
-          // audio.play();
+          audio.play();
           setTimeout(addRepetition, currentExercise.break * 1000);
           return;
         } else {
@@ -243,7 +243,7 @@ export const Player = (props: PlayerProps) => {
           setIsPause(true);
           setCurrentBreakDuration(props.practice.break);
           navigator.vibrate(vibrationPattern);
-          // audio.play();
+          audio.play();
           setTimeout(switchExercise, props.practice.break * 1000);
           return;
         }

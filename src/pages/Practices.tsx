@@ -25,13 +25,14 @@ const ButtonContainer = styled.span`
   min-width: 210px;
   display: flex;
   justify-content: flex-end;
+  align-items: center;
 `;
 
-const StyledName = styled.span`
-  font-size: 2em;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+const StyledName = styled.p`
+  font-size: 1.5em;
+  // white-space: nowrap;
+  // overflow: hidden;
+  // text-overflow: ellipsis;
   align-items: center;
   flex: 6;
   text-align: left;
