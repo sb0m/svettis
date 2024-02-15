@@ -145,7 +145,7 @@ export default function App() {
           <StyledLink to="/svettis/practices">Practices</StyledLink>
 
           <IconButton
-            onTouch={() => navigator.vibrate(200)}
+            onTouch={() => navigator.vibrate(30000)}
             icon={<BsFillArrowLeftSquareFill />}
           />
         </Navigation>
