@@ -5,9 +5,9 @@ import { VitePWA } from "vite-plugin-pwa";
 const manifestForPlugIn = {
   registerType: "prompt",
   manifest: {
-    name: "React-vite-app",
-    short_name: "react-vite-app",
-    description: "I am a simple vite app",
+    name: "Svettis",
+    short_name: "Svettis",
+    description: "Svettis - trainings application",
     icons: [
       {
         src: "/svettis/icons/icon-72x72.png",
