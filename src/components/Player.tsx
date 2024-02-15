@@ -107,6 +107,7 @@ type PlayerProps = {
 };
 
 export const Player = (props: PlayerProps) => {
+  const vibrationPattern = [1500, 500, 1500, 500, 1500];
   const [currentExercise, setCurrentExercise] = useState(
     props.practice.exercises[0]
   );
@@ -177,7 +178,7 @@ export const Player = (props: PlayerProps) => {
         if (currentRepetition < currentExercise.repetition) {
           setIsPause(true);
           setCurrentBreakDuration(currentExercise.break);
-          navigator.vibrate(3000);
+          navigator.vibrate(vibrationPattern);
           setTimeout(addRepetition, currentExercise.break * 1000);
           return;
         } else {
@@ -194,7 +195,7 @@ export const Player = (props: PlayerProps) => {
           // new Exercise
           setIsPause(true);
           setCurrentBreakDuration(props.practice.break);
-          navigator.vibrate(3000);
+          navigator.vibrate(vibrationPattern);
           setTimeout(switchExercise, props.practice.break * 1000);
           setImageDataUrl(null);
           return;
@@ -235,6 +236,13 @@ export const Player = (props: PlayerProps) => {
         ></ProgressBar>
       </ProgressWrapper>
       <CurrentTime>{`${props.time} sec`}</CurrentTime>
+      <audio id="my-audio">
+        <source src="./sounds/alarm.mp3" type="audio/mpeg" />
+        <p>
+          Download<a href="audiofile.mp3">audiofile.mp3</a>
+        </p>
+      </audio>
+      <button id="play">play</button>
     </StyledProgress>
   );
 
