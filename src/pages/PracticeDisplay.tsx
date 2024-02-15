@@ -68,7 +68,7 @@ export const PracticeDisplay = () => {
 
   return (
     <Container>
-      <h1>{practice?.name.toUpperCase()}</h1>
+      <h1>{practice?.name}</h1>
 
       <Content key={practice.id}>
         <Row>

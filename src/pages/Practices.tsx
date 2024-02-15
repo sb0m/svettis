@@ -129,7 +129,7 @@ export const Practices = () => {
 
   return (
     <Container>
-      <h1>PRACTICES</h1>
+      <h1>Practices</h1>
       <StyledAddButtonRow>
         <IconButton
           // onTouch={handleAdd}

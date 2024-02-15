@@ -18,10 +18,11 @@ const Root = styled.div`
   display: flex;
   justify-content: center;
   background-color: var(--bg-color);
-  font-family: Poor Story, sans-serif;
+  font-family: Quicksand, Poor Story, sans-serif;
   color: var(--text-color);
   text-align: center;
   font-size: 20px;
+  font-variant: small-caps;
 
   li {
     list-style-type: none;

@@ -28,7 +28,7 @@ export const PracticePlay = () => {
 
   return (
     <Container>
-      <h1>{practice?.name.toUpperCase()}</h1>
+      <h1>{practice?.name}</h1>
       {practice && <Player practice={practice} />}
       <ButtonRow>
         <IconButton

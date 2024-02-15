@@ -123,7 +123,7 @@ export const Exercises = () => {
 
   return (
     <Container>
-      <h1>EXERCISES</h1>
+      <h1>Exercises</h1>
       <StyledAddButtonRow>
         <IconButton
           link={`/svettis/add-exercise`}

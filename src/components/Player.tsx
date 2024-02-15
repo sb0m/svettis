@@ -302,14 +302,14 @@ export const Player = (props: PlayerProps) => {
 
         {isPause ? (
           <ExerciseNameRow>
-            <ExerciseName>BREAK</ExerciseName>
+            <ExerciseName>Break</ExerciseName>
             <span>{`| ${currentBreakDuration} sec |`}</span>
           </ExerciseNameRow>
         ) : (
           <ExerciseNameRow>
             <ExerciseName>{currentExercise.name}</ExerciseName>
-            <span>{`| ${currentExercise.duration} sec - `}</span>
-            <span>{`breaks ${currentExercise.break} sec |`}</span>
+            <span>{`| ${currentExercise.duration} Sec - `}</span>
+            <span>{`Breaks ${currentExercise.break} Sec |`}</span>
           </ExerciseNameRow>
         )}
         {isPause ? (
@@ -346,7 +346,7 @@ export const Player = (props: PlayerProps) => {
                   isPause
                 }
               >
-                | BREAK {props.practice.break} sec |
+                | Break {props.practice.break} Sec |
               </CurrentBreakSpan>
             </ExerciseSpan>
           );

@@ -97,7 +97,7 @@ export const ExerciseDisplay = () => {
 
   return (
     <Container>
-      <h1>{exercise?.name.toUpperCase()}</h1>
+      <h1>{exercise?.name}</h1>
       {exercise && (
         <Content key={exercise.id}>
           <Row>
