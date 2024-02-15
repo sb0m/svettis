@@ -117,8 +117,8 @@ export const Exercises = styled.div`
   }
 
   @media only screen and (max-height: 900px) {
-    overflow-y: visible;
-    overflow-x: hidden;
+    overflow-y: unset;
+    overflow-x: unset;
   }
 `;
 
@@ -131,6 +131,18 @@ export const ImgContainer = styled.div`
     aspect-ratio: auto;
     max-width: 95%;
     max-height: 300px;
+  }
+
+  @media only screen and (max-height: 900px) {
+    max-height: 200px;
+    height: 200px;
+    padding: 0.5em 0;
+
+    img {
+      aspect-ratio: auto;
+      max-width: 95%;
+      max-height: 200px;
+    }
   }
 `;
 
