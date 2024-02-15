@@ -53,7 +53,8 @@ const manifestForPlugIn = {
       },
       {
         src: "/svettis/icons/icon-512x512.png",
-        sizes: "512x512",
+        sizes:
+          "72x72 96x96 128x128 144x144 152x152 192x192 256x256 384x384 512x512",
         type: "image/png",
         purpose: "maskable",
       },
