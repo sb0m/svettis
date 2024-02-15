@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Toaster } from "react-hot-toast";
-import { BsFillArrowLeftSquareFill } from "react-icons/bs";
+import { Bs0CircleFill } from "react-icons/bs";
 import { initDB, useIndexedDB } from "react-indexed-db-hook";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, Outlet, useLocation } from "react-router-dom";
@@ -145,8 +145,8 @@ export default function App() {
           <StyledLink to="/svettis/practices">Practices</StyledLink>
 
           <IconButton
-            onTouch={() => navigator.vibrate(30000)}
-            icon={<BsFillArrowLeftSquareFill />}
+            onTouch={() => navigator.vibrate(3000)}
+            icon={<Bs0CircleFill />}
           />
         </Navigation>
       )}

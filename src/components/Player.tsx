@@ -177,7 +177,7 @@ export const Player = (props: PlayerProps) => {
         if (currentRepetition < currentExercise.repetition) {
           setIsPause(true);
           setCurrentBreakDuration(currentExercise.break);
-          navigator.vibrate(200);
+          navigator.vibrate(3000);
           setTimeout(addRepetition, currentExercise.break * 1000);
           return;
         } else {
@@ -194,7 +194,7 @@ export const Player = (props: PlayerProps) => {
           // new Exercise
           setIsPause(true);
           setCurrentBreakDuration(props.practice.break);
-          navigator.vibrate(200);
+          navigator.vibrate(3000);
           setTimeout(switchExercise, props.practice.break * 1000);
           setImageDataUrl(null);
           return;
