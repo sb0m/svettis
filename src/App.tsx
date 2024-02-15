@@ -24,6 +24,10 @@ const Root = styled.div`
   font-size: 20px;
   font-variant: small-caps;
 
+  h1 {
+    margin: 0.2em 0;
+  }
+
   li {
     list-style-type: none;
   }

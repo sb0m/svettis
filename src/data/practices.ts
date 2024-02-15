@@ -1,7 +1,7 @@
 import { Practice } from "../types/types";
 import { exercises } from "./exercises";
 
-export const StefanPractice: Practice = {
+const StefanPractice: Practice = {
   id: 424238,
   name: "Stefan Practice",
   break: 30,
@@ -18,7 +18,7 @@ export const StefanPractice: Practice = {
   undeletable: true,
 };
 
-export const ErikPractice: Practice = {
+const ErikPractice: Practice = {
   id: 424239,
   name: "Erik Practice",
   break: 30,
@@ -38,5 +38,15 @@ export const ErikPractice: Practice = {
   ],
   undeletable: true,
 };
+
+// const SusiCorePractice: Practice = {
+//   id: 424239,
+//   name: "Susi Core Practice",
+//   break: 30,
+//   exercises: [
+//     exercises[0],
+//   ],
+//   undeletable: true,
+// };
 
 export const practices = [StefanPractice, ErikPractice];

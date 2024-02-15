@@ -44,7 +44,6 @@ const ProgressBar = styled.div<{ width: string }>`
 export const ButtonRow = styled.div`
   display: flex;
   align-self: center;
-  margin-bottom: 1em;
   justify-content: center;
 `;
 
@@ -76,6 +75,9 @@ export const ExerciseName = styled.span`
   color: var(--highlight-color);
   font-size: 1.7em;
   display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 export const ExerciseNameRow = styled.span`
@@ -103,26 +105,32 @@ export const Exercises = styled.div`
   color: var(--text-color-dark);
   display: flex;
   flex-direction: column;
-  margin: 1em 0;
   border: 1px solid var(--extra-color);
   border-radius: 6px;
-
   overflow-y: auto;
   overflow-x: hidden;
+  flex: 1;
 
   h3 {
     color: var(--text-color);
     margin: 0.2em;
   }
+
+  @media only screen and (max-height: 900px) {
+    overflow-y: visible;
+    overflow-x: hidden;
+  }
 `;
 
 export const ImgContainer = styled.div`
-  margin: 1em 0;
+  max-height: 300px;
+  height: 300px;
+  padding: 0.5em 0;
 
   img {
-    max-width: 95%;
-    max-height: 30vh;
     aspect-ratio: auto;
+    max-width: 95%;
+    max-height: 300px;
   }
 `;
 
@@ -181,7 +189,7 @@ export const Player = (props: PlayerProps) => {
   }, [isPause]);
 
   useEffect(() => {
-    const vibrationPattern = [1500, 500, 1500, 500, 1500];
+    const vibrationPattern = [1500, 500, 1500];
     const audio = new Audio(audioUrl);
 
     const switchExercise = () => {
