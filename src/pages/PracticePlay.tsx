@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { styled } from "styled-components";
 import { IconButton } from "../components/IconButton";
-import { ButtonRow, Player } from "../components/Player";
+import { Player } from "../components/Player";
 import { IRootState } from "../store/store.tsx";
 import { Practice } from "../types/types";
 
@@ -13,6 +13,12 @@ const Container = styled.div`
   overflow-y: auto;
   overflow-x: hidden;
   width: 100%;
+`;
+
+const ButtonRow = styled.div`
+  display: flex;
+  align-self: center;
+  justify-content: center;
 `;
 
 export const PracticePlay = () => {

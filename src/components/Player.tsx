@@ -43,78 +43,82 @@ const ProgressBar = styled.div<{ width: string }>`
   border-top-left-radius: 4px;
 `;
 
-export const PlayerButtonRow = styled.div`
+const ButtonRow = styled.div`
+  display: flex;
+  align-self: center;
+  justify-content: space-between;
+`;
+
+const PlayButtonRow = styled.div`
   display: flex;
   align-self: center;
   justify-content: center;
-  margin-left: 20%;
+  width: 100%;
+  margin-left: -30px;
 `;
 
-export const ButtonRow = styled.div`
-  display: flex;
-`;
-
-export const SoundButton = styled(IconButton)`
+export const PlaySoundButton = styled(IconButton)`
   height: 30px;
   width: 30px;
   margin: 0.1em;
 `;
 
-export const StyledProgress = styled.div`
+const StyledProgress = styled.div`
   display: flex;
   flex-direction: column;
 `;
 
-export const CurrentExerciseSpan = styled.span<{ isCurrent: boolean }>`
+const CurrentExerciseSpan = styled.span<{ isCurrent: boolean }>`
   color: ${(props) =>
     props.isCurrent ? "var(--highlight-color)" : "var(--text-color)"};
   font-weight: bold;
   font-size: ${(props) => (props.isCurrent ? "1.4em" : "1em")};
 `;
 
-export const CurrentBreakSpan = styled.span<{ isCurrent: boolean }>`
+const CurrentBreakSpan = styled.span<{ isCurrent: boolean }>`
   color: ${(props) =>
     props.isCurrent ? "var(--highlight-color)" : "var(--text-color-dark)"};
   font-weight: bold;
   font-size: ${(props) => (props.isCurrent ? "1.4em" : "1em")};
 `;
 
-export const ExerciseSpan = styled.div`
+const ExerciseSpan = styled.div`
   display: flex;
   flex-direction: column;
 `;
 
-export const ExerciseName = styled.span`
+const ExerciseName = styled.span`
   color: var(--highlight-color);
   font-size: 1.7em;
   display: block;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  font-weight: bold;
 `;
 
-export const ExerciseNameRow = styled.span`
+const ExerciseNameRow = styled.span`
   color: var(--text-color);
 `;
 
-export const Repetition = styled.span`
+const Repetition = styled.span`
   color: var(--highlight-color);
 `;
 
-export const CurrentTime = styled.span`
+const CurrentTime = styled.span`
   color: var(--highlight-color);
   font-weight: bold;
   font-size: 1.7em;
   display: block;
 `;
 
-export const IconButtonBack = styled(IconButton)`
+const IconButtonBack = styled(IconButton)`
   svg {
     transform: rotate(180deg);
   }
 `;
 
-export const Exercises = styled.div`
+const Exercises = styled.div`
   color: var(--text-color-dark);
   display: flex;
   flex-direction: column;
@@ -135,7 +139,7 @@ export const Exercises = styled.div`
   }
 `;
 
-export const ImgContainer = styled.div`
+const ImgContainer = styled.div`
   max-height: 300px;
   height: 300px;
   padding: 0.5em 0;
@@ -297,7 +301,7 @@ export const Player = (props: PlayerProps) => {
           width={parseInt((props.time / props.duration) * 100 + "") + "%"}
         ></ProgressBar>
       </ProgressWrapper>
-      <CurrentTime>{`${props.time} sec`}</CurrentTime>
+      <CurrentTime>{`${props.time} Sec`}</CurrentTime>
     </StyledProgress>
   );
 
@@ -315,11 +319,11 @@ export const Player = (props: PlayerProps) => {
     <PlayerContainer>
       <PlayContent>
         <ButtonRow>
-          <SoundButton
+          <PlaySoundButton
             onTouch={() => togglePlaySound((prev) => !prev)}
             icon={playSound ? <BsFillBellFill /> : <BsFillBellSlashFill />}
           />
-          <PlayerButtonRow>
+          <PlayButtonRow>
             <IconButtonBack
               onTouch={() => changeExercise(currentExerciseIndex - 1)}
               icon={<BsFastForwardBtnFill />}
@@ -340,13 +344,13 @@ export const Player = (props: PlayerProps) => {
                 currentExerciseIndex === props.practice.exercises.length - 1
               }
             />
-          </PlayerButtonRow>
+          </PlayButtonRow>
         </ButtonRow>
 
         {isPause ? (
           <ExerciseNameRow>
             <ExerciseName>Break</ExerciseName>
-            <span>{`| ${currentBreakDuration} sec |`}</span>
+            <span>{`| ${currentBreakDuration} Sec |`}</span>
           </ExerciseNameRow>
         ) : (
           <ExerciseNameRow>
