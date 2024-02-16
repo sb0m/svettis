@@ -112,6 +112,16 @@ const IconButtonBack = styled(IconButton)`
   }
 `;
 
+const PlayIconButton = styled(IconButton)`
+  width: 2em;
+  height: 2em;
+  margin: 0.1em;
+
+  svg {
+    transform: rotate(0deg);
+  }
+`;
+
 const Exercises = styled.div`
   color: var(--text-color-dark);
   display: flex;
@@ -313,7 +323,7 @@ export const Player = (props: PlayerProps) => {
     <PlayerContainer>
       <PlayContent>
         <ButtonRow>
-          <IconButton
+          <PlayIconButton
             onTouch={() => togglePlaySound((prev) => !prev)}
             icon={playSound ? <BsFillBellFill /> : <BsFillBellSlashFill />}
           />
