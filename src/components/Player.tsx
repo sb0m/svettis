@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import {
   BsFastForwardBtnFill,
+  BsFillBellFill,
+  BsFillBellSlashFill,
   BsFillPauseCircleFill,
   BsFillPlayBtnFill,
 } from "react-icons/bs";
@@ -20,7 +22,7 @@ const PlayerContainer = styled.div`
 const PlayContent = styled.div`
   border: 1px solid var(--extra-color);
   border-radius: 8px;
-  padding: 0.5em;
+  padding: 0.2em;
 `;
 
 const ProgressWrapper = styled.div`
@@ -41,10 +43,21 @@ const ProgressBar = styled.div<{ width: string }>`
   border-top-left-radius: 4px;
 `;
 
-export const ButtonRow = styled.div`
+export const PlayerButtonRow = styled.div`
   display: flex;
   align-self: center;
   justify-content: center;
+  margin-left: 20%;
+`;
+
+export const ButtonRow = styled.div`
+  display: flex;
+`;
+
+export const SoundButton = styled(IconButton)`
+  height: 30px;
+  width: 30px;
+  margin: 0.1em;
 `;
 
 export const StyledProgress = styled.div`
@@ -164,6 +177,7 @@ export const Player = (props: PlayerProps) => {
   const [imageDataUrl, setImageDataUrl] = useState<string | ArrayBuffer | null>(
     null
   );
+  const [playSound, togglePlaySound] = useState<boolean>(false);
 
   const audioUrl = "../../sounds/alarm.mp3";
 
@@ -211,14 +225,12 @@ export const Player = (props: PlayerProps) => {
       setCurrentTime(0);
       setCurrentRepetition(1);
       setIsPause(false);
-      audio.pause();
     };
 
     const addRepetition = () => {
       setCurrentRepetition((prev) => prev + 1);
       setCurrentTime(0);
       setIsPause(false);
-      audio.pause();
     };
 
     if (isPlaying) {
@@ -228,7 +240,7 @@ export const Player = (props: PlayerProps) => {
           setIsPause(true);
           setCurrentBreakDuration(currentExercise.break);
           navigator.vibrate(vibrationPattern);
-          audio.play();
+          playSound && audio.play();
           setTimeout(addRepetition, currentExercise.break * 1000);
           return;
         } else {
@@ -245,7 +257,7 @@ export const Player = (props: PlayerProps) => {
           setIsPause(true);
           setCurrentBreakDuration(props.practice.break);
           navigator.vibrate(vibrationPattern);
-          audio.play();
+          playSound && audio.play();
           setTimeout(switchExercise, props.practice.break * 1000);
           return;
         }
@@ -270,6 +282,7 @@ export const Player = (props: PlayerProps) => {
     currentExerciseIndex,
     currentRepetition,
     props.practice.break,
+    playSound,
   ]);
 
   type ProgressProps = {
@@ -302,24 +315,32 @@ export const Player = (props: PlayerProps) => {
     <PlayerContainer>
       <PlayContent>
         <ButtonRow>
-          <IconButtonBack
-            onTouch={() => changeExercise(currentExerciseIndex - 1)}
-            icon={<BsFastForwardBtnFill />}
-            disabled={isPause || currentExerciseIndex === 0}
+          <SoundButton
+            onTouch={() => togglePlaySound((prev) => !prev)}
+            icon={playSound ? <BsFillBellFill /> : <BsFillBellSlashFill />}
           />
-          <IconButton
-            onTouch={() => setIsPlaying((prev) => !prev)}
-            icon={isPlaying ? <BsFillPauseCircleFill /> : <BsFillPlayBtnFill />}
-            disabled={isPause}
-          />
-          <IconButton
-            onTouch={() => changeExercise(currentExerciseIndex + 1)}
-            icon={<BsFastForwardBtnFill />}
-            disabled={
-              isPause ||
-              currentExerciseIndex === props.practice.exercises.length - 1
-            }
-          />
+          <PlayerButtonRow>
+            <IconButtonBack
+              onTouch={() => changeExercise(currentExerciseIndex - 1)}
+              icon={<BsFastForwardBtnFill />}
+              disabled={isPause || currentExerciseIndex === 0}
+            />
+            <IconButton
+              onTouch={() => setIsPlaying((prev) => !prev)}
+              icon={
+                isPlaying ? <BsFillPauseCircleFill /> : <BsFillPlayBtnFill />
+              }
+              disabled={isPause}
+            />
+            <IconButton
+              onTouch={() => changeExercise(currentExerciseIndex + 1)}
+              icon={<BsFastForwardBtnFill />}
+              disabled={
+                isPause ||
+                currentExerciseIndex === props.practice.exercises.length - 1
+              }
+            />
+          </PlayerButtonRow>
         </ButtonRow>
 
         {isPause ? (
