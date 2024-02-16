@@ -57,12 +57,6 @@ const PlayButtonRow = styled.div`
   margin-left: -30px;
 `;
 
-export const PlaySoundButton = styled(IconButton)`
-  height: 30px;
-  width: 30px;
-  margin: 0.1em;
-`;
-
 const StyledProgress = styled.div`
   display: flex;
   flex-direction: column;
@@ -319,7 +313,7 @@ export const Player = (props: PlayerProps) => {
     <PlayerContainer>
       <PlayContent>
         <ButtonRow>
-          <PlaySoundButton
+          <IconButton
             onTouch={() => togglePlaySound((prev) => !prev)}
             icon={playSound ? <BsFillBellFill /> : <BsFillBellSlashFill />}
           />
