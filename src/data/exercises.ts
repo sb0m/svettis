@@ -9,7 +9,7 @@ const ObliqueTwistSquat: Exercise = {
   break: 10,
   image: null,
   imageAsset: "ObliqueTwistSquat.png",
-  description: "",
+  description: "If possible with weight",
   undeletable: true,
 };
 
@@ -81,7 +81,7 @@ const SideToSideOblique: Exercise = {
 };
 
 // 6
-const DeadBug: Exercise = {
+export const DeadBug: Exercise = {
   id: 42428,
   name: "Dead Bug",
   duration: 40,
@@ -133,7 +133,7 @@ const SplitSquat: Exercise = {
 };
 
 // 10
-const HipLift: Exercise = {
+export const HipLift: Exercise = {
   id: 42432,
   name: "Hip Lift",
   duration: 30,
@@ -159,7 +159,7 @@ const TrizepsDips: Exercise = {
 };
 
 // 12
-const PushUps: Exercise = {
+export const PushUps: Exercise = {
   id: 42435,
   name: "Push Ups",
   duration: 40,
@@ -186,13 +186,169 @@ const BearPlank: Exercise = {
 
 // 14
 const HighCrunches: Exercise = {
-  id: 42437,
+  id: 42440,
   name: "High Crunches",
   duration: 40,
   repetition: 2,
   break: 20,
   image: null,
   imageAsset: "HighCrunches.png",
+  description: "",
+  undeletable: true,
+};
+
+// 15
+export const OverheadWeightMarch: Exercise = {
+  id: 424241,
+  name: "Overhead Weight March",
+  duration: 60,
+  repetition: 1,
+  break: 0,
+  image: null,
+  imageAsset: "OverheadWeightMarch.png",
+  description: "If possible with weight",
+  undeletable: true,
+};
+
+// 16
+export const AroundTheWorld: Exercise = {
+  id: 424250,
+  name: "Around The World",
+  duration: 60,
+  repetition: 1,
+  break: 0,
+  image: null,
+  imageAsset: "AroundTheWorld.png",
+  description: "",
+  undeletable: true,
+};
+
+// 17
+export const DumbbellSnatch: Exercise = {
+  id: 424252,
+  name: "Dumbbell Snatch",
+  duration: 60,
+  repetition: 1,
+  break: 0,
+  image: null,
+  imageAsset: "DumbbellSnatch.png",
+  description: "",
+  undeletable: true,
+};
+
+// 18
+export const Knip: Exercise = {
+  id: 424253,
+  name: "Knip",
+  duration: 120,
+  repetition: 6,
+  break: 10,
+  image: null,
+  imageAsset: null,
+  description: "",
+  undeletable: true,
+};
+
+// 19
+export const CurtsyLunge: Exercise = {
+  id: 424254,
+  name: "Curtsy Lunge",
+  duration: 60,
+  repetition: 3,
+  break: 15,
+  image: null,
+  imageAsset: "CurtsyLounge.png",
+  description: "",
+  undeletable: true,
+};
+
+// 20
+export const ToeTap: Exercise = {
+  id: 424255,
+  name: "Toe Tap",
+  duration: 60,
+  repetition: 3,
+  break: 15,
+  image: null,
+  imageAsset: "ToeTap.png",
+  description: "",
+  undeletable: true,
+};
+
+// 21
+export const HipLiftLegUp: Exercise = {
+  id: 424256,
+  name: "Hip Lift Leg Up",
+  duration: 60,
+  repetition: 3,
+  break: 10,
+  image: null,
+  imageAsset: "HipLiftLegUp.png",
+  description: "",
+  undeletable: true,
+};
+
+// 22
+export const HipLiftLegDown: Exercise = {
+  id: 424257,
+  name: "Hip Lift Leg Down",
+  duration: 60,
+  repetition: 3,
+  break: 10,
+  image: null,
+  imageAsset: "HipLiftLegDown.png",
+  description: "",
+  undeletable: true,
+};
+
+// 22
+export const FireHydrant: Exercise = {
+  id: 424257,
+  name: "Fire Hydrant",
+  duration: 60,
+  repetition: 3,
+  break: 10,
+  image: null,
+  imageAsset: "FireHydrant.png",
+  description: "",
+  undeletable: true,
+};
+
+// 22
+export const Clams: Exercise = {
+  id: 424257,
+  name: "Clams",
+  duration: 60,
+  repetition: 3,
+  break: 10,
+  image: null,
+  imageAsset: "Clams.png",
+  description: "",
+  undeletable: true,
+};
+
+// 22
+export const KneeTouchExtension: Exercise = {
+  id: 424257,
+  name: "Knee Touch Extension",
+  duration: 60,
+  repetition: 3,
+  break: 10,
+  image: null,
+  imageAsset: "KneeTouchExtension.png",
+  description: "",
+  undeletable: true,
+};
+
+// 22
+export const InnerThighLegLift: Exercise = {
+  id: 424257,
+  name: "Inner Thigh Leg Lift",
+  duration: 60,
+  repetition: 3,
+  break: 10,
+  image: null,
+  imageAsset: "InnerThighLegLift.png",
   description: "",
   undeletable: true,
 };

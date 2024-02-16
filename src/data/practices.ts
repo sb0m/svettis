@@ -1,5 +1,22 @@
 import { Practice } from "../types/types";
-import { exercises } from "./exercises";
+import {
+  AroundTheWorld,
+  Clams,
+  CurtsyLunge,
+  DeadBug,
+  DumbbellSnatch,
+  FireHydrant,
+  HipLift,
+  HipLiftLegDown,
+  HipLiftLegUp,
+  InnerThighLegLift,
+  KneeTouchExtension,
+  Knip,
+  OverheadWeightMarch,
+  PushUps,
+  ToeTap,
+  exercises,
+} from "./exercises";
 
 const StefanPractice: Practice = {
   id: 424238,
@@ -39,14 +56,34 @@ const ErikPractice: Practice = {
   undeletable: true,
 };
 
-// const SusiCorePractice: Practice = {
-//   id: 424239,
-//   name: "Susi Core Practice",
-//   break: 30,
-//   exercises: [
-//     exercises[0],
-//   ],
-//   undeletable: true,
-// };
+const SusiCorePractice: Practice = {
+  id: 424251,
+  name: "Susi Core Practice",
+  break: 30,
+  exercises: [
+    OverheadWeightMarch,
+    AroundTheWorld,
+    DumbbellSnatch,
+    OverheadWeightMarch,
+    AroundTheWorld,
+    DumbbellSnatch,
+    OverheadWeightMarch,
+    AroundTheWorld,
+    DumbbellSnatch,
+    Knip,
+    HipLift,
+    CurtsyLunge,
+    ToeTap,
+    FireHydrant,
+    HipLiftLegUp,
+    Clams,
+    HipLiftLegDown,
+    KneeTouchExtension,
+    InnerThighLegLift,
+    DeadBug,
+    PushUps,
+  ],
+  undeletable: true,
+};
 
-export const practices = [StefanPractice, ErikPractice];
+export const practices = [StefanPractice, ErikPractice, SusiCorePractice];
