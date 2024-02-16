@@ -211,12 +211,14 @@ export const Player = (props: PlayerProps) => {
       setCurrentTime(0);
       setCurrentRepetition(1);
       setIsPause(false);
+      audio.pause();
     };
 
     const addRepetition = () => {
       setCurrentRepetition((prev) => prev + 1);
       setCurrentTime(0);
       setIsPause(false);
+      audio.pause();
     };
 
     if (isPlaying) {
