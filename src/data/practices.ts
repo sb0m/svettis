@@ -88,7 +88,7 @@ const SusiCorePractice: Practice = {
 };
 
 const SusiCoreDaily: Practice = {
-  id: 424251,
+  id: 4242421,
   name: "Susi Core Practice",
   break: 30,
   exercises: [
