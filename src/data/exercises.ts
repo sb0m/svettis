@@ -353,6 +353,19 @@ export const InnerThighLegLift: Exercise = {
   undeletable: true,
 };
 
+// 18
+export const SingleKnip: Exercise = {
+  id: 424258,
+  name: "Single Knip",
+  duration: 120,
+  repetition: 1,
+  break: 0,
+  image: null,
+  imageAsset: null,
+  description: "",
+  undeletable: true,
+};
+
 export const exercises = [
   ObliqueTwistSquat,
   MountainClimbers,
@@ -369,4 +382,5 @@ export const exercises = [
   PushUps,
   BearPlank,
   HighCrunches,
+  SingleKnip,
 ];

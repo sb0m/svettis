@@ -14,6 +14,7 @@ import {
   Knip,
   OverheadWeightMarch,
   PushUps,
+  SingleKnip,
   ToeTap,
   exercises,
 } from "./exercises";
@@ -86,4 +87,24 @@ const SusiCorePractice: Practice = {
   undeletable: true,
 };
 
-export const practices = [StefanPractice, ErikPractice, SusiCorePractice];
+const SusiCoreDaily: Practice = {
+  id: 424251,
+  name: "Susi Core Practice",
+  break: 30,
+  exercises: [
+    HipLiftLegUp,
+    SingleKnip,
+    HipLiftLegDown,
+    SingleKnip,
+    DeadBug,
+    SingleKnip,
+  ],
+  undeletable: true,
+};
+
+export const practices = [
+  StefanPractice,
+  ErikPractice,
+  SusiCorePractice,
+  SusiCoreDaily,
+];
