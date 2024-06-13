@@ -86,7 +86,7 @@ const SusiCorePractice: Practice = {
   ],
   undeletable: true,
 };
-// test
+
 const SusiCoreDaily: Practice = {
   id: 4242421,
   name: "Susi Core Daily",
