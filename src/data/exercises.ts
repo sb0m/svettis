@@ -279,7 +279,7 @@ export const ToeTap: Exercise = {
 export const HipLiftLegUp: Exercise = {
   id: 424256,
   name: "Hip Lift Leg Up",
-  duration: 60,
+  duration: 50,
   repetition: 3,
   break: 10,
   image: null,
@@ -366,6 +366,44 @@ export const SingleKnip: Exercise = {
   undeletable: true,
 };
 
+export const PushAgainstKnee: Exercise = {
+  id: 424259,
+  name: "Push Against Knee",
+  duration: 180,
+  repetition: 1,
+  break: 0,
+  image: null,
+  imageAsset: "PushAgainstKnee.jpg",
+  description:
+    "Push hands against knee, breathe out at the same time, push down ribs, 5s - 10s",
+  undeletable: true,
+};
+
+export const ArmRaiseWithRubberBand: Exercise = {
+  id: 424259,
+  name: "Arm Raise With Rubber Band",
+  duration: 50,
+  repetition: 3,
+  break: 10,
+  image: null,
+  imageAsset: "ArmRaiseWithRubberBand.jpg",
+  description: "Lean forward a bit, pull upp rubber band, breathe out",
+  undeletable: true,
+};
+
+export const DeadBugDiagonal: Exercise = {
+  id: 424260,
+  name: "Dead Bug Diagonal",
+  duration: 60,
+  repetition: 3,
+  break: 10,
+  image: null,
+  imageAsset: "DeadBugDiagonal.jpg",
+  description:
+    "Breathe out on stretch, push the other hand against the knee which is up",
+  undeletable: true,
+};
+
 export const exercises = [
   ObliqueTwistSquat,
   MountainClimbers,
@@ -383,4 +421,7 @@ export const exercises = [
   BearPlank,
   HighCrunches,
   SingleKnip,
+  DeadBugDiagonal,
+  ArmRaiseWithRubberBand,
+  PushAgainstKnee,
 ];

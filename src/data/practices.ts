@@ -1,9 +1,11 @@
 import { Practice } from "../types/types";
 import {
+  ArmRaiseWithRubberBand,
   AroundTheWorld,
   Clams,
   CurtsyLunge,
   DeadBug,
+  DeadBugDiagonal,
   DumbbellSnatch,
   FireHydrant,
   HipLift,
@@ -13,6 +15,7 @@ import {
   KneeTouchExtension,
   Knip,
   OverheadWeightMarch,
+  PushAgainstKnee,
   PushUps,
   SingleKnip,
   ToeTap,
@@ -92,19 +95,21 @@ const SusiCoreDaily: Practice = {
   name: "Susi Core Daily",
   break: 30,
   exercises: [
+    PushAgainstKnee,
     HipLiftLegUp,
     SingleKnip,
     HipLiftLegDown,
     SingleKnip,
-    DeadBug,
+    DeadBugDiagonal,
     SingleKnip,
+    ArmRaiseWithRubberBand,
   ],
   undeletable: true,
 };
 
 export const practices = [
+  SusiCoreDaily,
   StefanPractice,
   ErikPractice,
   SusiCorePractice,
-  SusiCoreDaily,
 ];
