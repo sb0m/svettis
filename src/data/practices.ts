@@ -2,11 +2,13 @@ import { Practice } from "../types/types";
 import {
   ArmRaiseWithRubberBand,
   AroundTheWorld,
+  BirdDog,
   Clams,
   CurtsyLunge,
   DeadBug,
   DeadBugDiagonal,
   DumbbellSnatch,
+  exercises,
   FireHydrant,
   HipLift,
   HipLiftLegDown,
@@ -19,7 +21,6 @@ import {
   PushUps,
   SingleKnip,
   ToeTap,
-  exercises,
 } from "./exercises";
 
 const StefanPractice: Practice = {
@@ -90,10 +91,10 @@ const SusiCorePractice: Practice = {
   undeletable: true,
 };
 
-const SusiCoreDaily: Practice = {
+const SusiCoreDaily1: Practice = {
   id: 4242421,
   name: "Susi Core Daily",
-  break: 30,
+  break: 15,
   exercises: [
     PushAgainstKnee,
     HipLiftLegUp,
@@ -107,8 +108,25 @@ const SusiCoreDaily: Practice = {
   undeletable: true,
 };
 
+const SusiCoreDaily2: Practice = {
+  id: 4242499,
+  name: "Susi Core Daily",
+  break: 15,
+  exercises: [
+    PushAgainstKnee,
+    SingleKnip,
+    ToeTap,
+    SingleKnip,
+    BirdDog,
+    SingleKnip,
+    ArmRaiseWithRubberBand,
+  ],
+  undeletable: true,
+};
+
 export const practices = [
-  SusiCoreDaily,
+  SusiCoreDaily1,
+  SusiCoreDaily2,
   StefanPractice,
   ErikPractice,
   SusiCorePractice,

@@ -1,7 +1,7 @@
 import { Exercise } from "../types/types";
 
 // 0
-const ObliqueTwistSquat: Exercise = {
+export const ObliqueTwistSquat: Exercise = {
   id: 424242,
   name: "Oblique Twist Squat",
   duration: 50,
@@ -14,7 +14,7 @@ const ObliqueTwistSquat: Exercise = {
 };
 
 // 1
-const MountainClimbers: Exercise = {
+export const MountainClimbers: Exercise = {
   id: 424243,
   name: "Mountain Climbers",
   duration: 50,
@@ -27,7 +27,7 @@ const MountainClimbers: Exercise = {
 };
 
 // 2
-const BirdDog: Exercise = {
+export const BirdDog: Exercise = {
   id: 424244,
   name: "Bird Dog",
   duration: 50,
@@ -40,7 +40,7 @@ const BirdDog: Exercise = {
 };
 
 // 3
-const ElbowPlankRaise: Exercise = {
+export const ElbowPlankRaise: Exercise = {
   id: 42425,
   name: "Elbow Plank Raise",
   duration: 40,
@@ -54,7 +54,7 @@ const ElbowPlankRaise: Exercise = {
 };
 
 // 4
-const Swimming: Exercise = {
+export const Swimming: Exercise = {
   id: 42426,
   name: "Swimming",
   duration: 40,
@@ -68,7 +68,7 @@ const Swimming: Exercise = {
 };
 
 // 5
-const SideToSideOblique: Exercise = {
+export const SideToSideOblique: Exercise = {
   id: 42427,
   name: "Side To Side Oblique",
   duration: 40,
@@ -94,7 +94,7 @@ export const DeadBug: Exercise = {
 };
 
 // 7
-const GeneralStretch: Exercise = {
+export const GeneralStretch: Exercise = {
   id: 42429,
   name: "General Stretch",
   duration: 300,
@@ -107,7 +107,7 @@ const GeneralStretch: Exercise = {
 };
 
 // 8
-const ToeLift: Exercise = {
+export const ToeLift: Exercise = {
   id: 42430,
   name: "Toe Lift",
   duration: 60,
@@ -120,7 +120,7 @@ const ToeLift: Exercise = {
 };
 
 // 9
-const SplitSquat: Exercise = {
+export const SplitSquat: Exercise = {
   id: 42431,
   name: "Split Squat",
   duration: 30,
@@ -146,7 +146,7 @@ export const HipLift: Exercise = {
 };
 
 // 11
-const TrizepsDips: Exercise = {
+export const TrizepsDips: Exercise = {
   id: 42434,
   name: "Trizeps Dips",
   duration: 40,
@@ -172,7 +172,7 @@ export const PushUps: Exercise = {
 };
 
 // 13
-const BearPlank: Exercise = {
+export const BearPlank: Exercise = {
   id: 42436,
   name: "Bear Plank",
   duration: 40,
@@ -185,7 +185,7 @@ const BearPlank: Exercise = {
 };
 
 // 14
-const HighCrunches: Exercise = {
+export const HighCrunches: Exercise = {
   id: 42440,
   name: "High Crunches",
   duration: 40,
@@ -268,7 +268,7 @@ export const ToeTap: Exercise = {
   name: "Toe Tap",
   duration: 60,
   repetition: 3,
-  break: 15,
+  break: 10,
   image: null,
   imageAsset: "ToeTap.png",
   description: "",
@@ -382,8 +382,8 @@ export const PushAgainstKnee: Exercise = {
 export const ArmRaiseWithRubberBand: Exercise = {
   id: 424259,
   name: "Arm Raise With Rubber Band",
-  duration: 50,
-  repetition: 3,
+  duration: 60,
+  repetition: 2,
   break: 10,
   image: null,
   imageAsset: "ArmRaiseWithRubberBand.jpg",
