@@ -45,7 +45,8 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           path: "./dist"
-          name: "github-pages"
+      - name: Debug uploaded artifacts
+        run: ls -la ${{ runner.temp }}/github-pages
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v3
