@@ -61,9 +61,9 @@ const ErikPractice: Practice = {
   undeletable: true,
 };
 
-const SusiCorePractice: Practice = {
+const SusiCore: Practice = {
   id: 424251,
-  name: "Susi Core Practice",
+  name: "Susi Core",
   break: 30,
   exercises: [
     OverheadWeightMarch,
@@ -93,7 +93,7 @@ const SusiCorePractice: Practice = {
 
 const SusiCoreDaily1: Practice = {
   id: 4242421,
-  name: "Susi Core Daily",
+  name: "Susi Core Daily 1",
   break: 15,
   exercises: [
     PushAgainstKnee,
@@ -110,7 +110,7 @@ const SusiCoreDaily1: Practice = {
 
 const SusiCoreDaily2: Practice = {
   id: 4242499,
-  name: "Susi Core Daily",
+  name: "Susi Core Daily 2",
   break: 15,
   exercises: [
     PushAgainstKnee,
@@ -127,7 +127,7 @@ const SusiCoreDaily2: Practice = {
 export const practices = [
   SusiCoreDaily1,
   SusiCoreDaily2,
-  StefanPractice,
+  SusiCore,
   ErikPractice,
-  SusiCorePractice,
+  StefanPractice,
 ];
