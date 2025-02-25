@@ -43,7 +43,7 @@ jobs:
         uses: actions/configure-pages@v4 # Updated to v4
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v4 # Using v4
+        uses: actions/upload-pages-artifact@v2 # Using v4
         with:
           path: "./dist"
           artifact-name: "github-pages" # Explicit artifact name
